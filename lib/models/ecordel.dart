@@ -1,12 +1,16 @@
+import 'dart:ffi';
+
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 
 class Ecordel with ChangeNotifier {
-  double id;
-  String autor;
-  String text;
+  int id;
+  String author;  
+  String tittle;
+  String description;
+  String content;
   String xilogravura; // url
-  String descriptor;
+  
 
   List<String> tags = [
     "engraçado",
@@ -16,9 +20,35 @@ class Ecordel with ChangeNotifier {
 
   Ecordel({
     this.id,
-    this.autor,
-    this.text,
+    this.author,
+    this.tittle,
+    this.description,
+    this.content,
     this.xilogravura,
-    this.descriptor,
+    
   });
+
+  factory Ecordel.fromJson(Map<String, dynamic> json) {
+    return Ecordel(
+      id: json['id'],
+      author: json['author'] as String,
+      tittle: json['title'] as String,
+      content: json['content'] as String,
+      description: json['description'] as String,
+      xilogravura: json['xilogravura'] as String,
+      
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': this.id,
+      'author': this.author,
+      'tittle': this.tittle,
+      'content': this.content,
+      'description': this.description,
+      'xilogravura': this.xilogravura,
+      
+    };
+  }
 }
