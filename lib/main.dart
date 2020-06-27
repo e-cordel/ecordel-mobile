@@ -22,12 +22,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
           appBarTheme: AppBarTheme(
-            textTheme: TextTheme(              
-            ).copyWith(
-              headline6: TextStyle(fontSize: 25, fontFamily: GoogleFonts.pangolin().fontFamily, color: Colors.black)
-            )
-            
-          ),
+              textTheme: TextTheme().copyWith(
+                  headline6: TextStyle(
+                      fontSize: 25,
+                      fontFamily: GoogleFonts.pangolin().fontFamily,
+                      color: Colors.black))),
           brightness: Brightness.light,
           primarySwatch: Colors.amber,
           backgroundColor: Colors.amber[100],

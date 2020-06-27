@@ -1,7 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/foundation.dart';
-import 'package:provider/provider.dart';
+
 
 class Ecordel with ChangeNotifier {
   int id;

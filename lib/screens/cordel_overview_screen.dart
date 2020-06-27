@@ -1,4 +1,3 @@
-import 'package:ecordel/dummy/cordeis_duumy.dart';
 import 'package:ecordel/models/ecordel.dart';
 import 'package:ecordel/providers/cordel_provider.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ class _CordelOverviewScreenState extends State<CordelOverviewScreen> {
   bool _isLoading = false;
   bool _isInit = true;
   @override
-  
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
@@ -40,28 +38,28 @@ class _CordelOverviewScreenState extends State<CordelOverviewScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Meus Cordeis'),
-        // actions: <Widget>[
-        //   IconButton(
-        //     icon: Icon(Icons.search),
-        //     onPressed: () {
-        //       showSearch(context: context, delegate: EcordelSearch());
-        //     },
-        //   ),
-        // ],
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: EcordelSearch());
+            },
+          ),
+        ],
       ),
       body: this._isLoading == true
           ? Center(child: CircularProgressIndicator())
           : Container(
-            color: Theme.of(context).backgroundColor,
-                      child: GridView.count(
-              
+              color: Theme.of(context).backgroundColor,
+              child: GridView.count(
                 childAspectRatio: 0.75,
                 primary: false,
                 padding: const EdgeInsets.all(20),
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                children: List.generate(eCordelProvider.getAll().length, (index) {
+                children:
+                    List.generate(eCordelProvider.getAll().length, (index) {
                   Ecordel cordel = eCordelProvider.getAll().elementAt(index);
                   return ChangeNotifierProvider.value(
                     value: cordel,
@@ -69,10 +67,9 @@ class _CordelOverviewScreenState extends State<CordelOverviewScreen> {
                   );
                 }),
               ),
-          ),
+            ),
     );
   }
-
 }
 // ===================================== SEARCH
 
@@ -83,7 +80,7 @@ class EcordelSearch extends SearchDelegate<Ecordel> {
     EcordelProvider _ecordelProvider =
         Provider.of<EcordelProvider>(context, listen: false);
     await _ecordelProvider.fethAll();
-    this._cordeis = await _ecordelProvider.getAll();
+    this._cordeis = _ecordelProvider.getAll();
   }
 
   @override

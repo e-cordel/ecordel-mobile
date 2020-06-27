@@ -4,7 +4,7 @@ import '../providers/cordel_provider.dart';
 import '../models/ecordel.dart';
 
 class ReadScreen extends StatefulWidget {
-  int cordelId;
+  final int cordelId;
   ReadScreen({this.cordelId});
 
   @override
@@ -26,7 +26,7 @@ class _ReadScreenState extends State<ReadScreen> {
       Provider.of<EcordelProvider>(context, listen: false)
           .fethById(widget.cordelId)
           .then((cordel) {
-            print('CORDEL PUXADO FOI: ${cordel.content}');
+        print('CORDEL PUXADO FOI: ${cordel.content}');
         this._ecordel = cordel;
         setState(() {
           this._isLoading = false;
@@ -38,25 +38,19 @@ class _ReadScreenState extends State<ReadScreen> {
     super.didChangeDependencies();
   }
 
-  // Future<Ecordel> _fethEcordel(BuildContext context) async {
-  //   Ecordel fetchEecordel;
-
-  //   var snapshot = await Provider.of<EcordelProvider>(context, listen: false)
-  //       .findById(this.widget.cordelId);
-  //   return Ecordel(snapshot);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: this._isLoading ? Text('') : Text(this._ecordel.tittle) ,
+        title: this._isLoading ? Text('') : Text(this._ecordel.tittle),
         // title: Text("teste"),
         centerTitle: true,
       ),
       // body: Center(child: Text("testando"),)
       body: this._isLoading
-          ? Center(child: CircularProgressIndicator(),)
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
           : SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.all(15),

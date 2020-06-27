@@ -1,11 +1,11 @@
-import 'dart:io';
+
 
 import '../models/ecordel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:provider/provider.dart';
 import '../screens/read_screen.dart';
-import '../providers/cordel_provider.dart';
+
 
 class BookWidget extends StatelessWidget {
   @override
