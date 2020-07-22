@@ -12,9 +12,35 @@ class ReadScreen extends StatefulWidget {
 }
 
 class _ReadScreenState extends State<ReadScreen> {
+  void _textResize(bool addSize) {
+    if (addSize && this._textSizeMultiplier <= 1.8) {
+      setState(() {
+        this._textSizeMultiplier += 0.2;
+      });
+      print(_textSizeMultiplier);
+      return;
+    }
+    if (!addSize && this._textSizeMultiplier >= 1.2) {
+      setState(() {
+        this._textSizeMultiplier -= 0.2;
+      });
+      print(_textSizeMultiplier);
+      return;
+    }
+  }
+
+  void _textPlus() {
+    _textResize(true);
+  }
+
+  void _textMinor() {
+    _textResize(false);
+  }
+
   Ecordel _ecordel;
   bool _isLoading = false;
   bool _firstBuild = true;
+  double _textSizeMultiplier = 1.0;
 
   @override
   void didChangeDependencies() {
@@ -26,7 +52,6 @@ class _ReadScreenState extends State<ReadScreen> {
       Provider.of<EcordelProvider>(context, listen: false)
           .fethById(widget.cordelId)
           .then((cordel) {
-        print('CORDEL PUXADO FOI: ${cordel.content}');
         this._ecordel = cordel;
         setState(() {
           this._isLoading = false;
@@ -40,31 +65,60 @@ class _ReadScreenState extends State<ReadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: this._isLoading ? Text('') : Text(this._ecordel.tittle),
-        // title: Text("teste"),
-        centerTitle: true,
-      ),
-      // body: Center(child: Text("testando"),)
-      body: this._isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.all(15),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      this._ecordel.content,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Text("Autor: ${this._ecordel.author}")
-                  ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: <Widget>[
+            Row(
+              children: <Widget>[
+                Text(
+                  "Texto: ",
+                  style: TextStyle(fontSize: 20),
+                ),
+                IconButton(
+                  iconSize: 20,
+                  icon: Icon(Icons.add),
+                  onPressed: _textPlus,
+                ),
+                IconButton(
+                  iconSize: 20,
+                  icon: Icon(Icons.remove),
+                  onPressed: _textMinor,
+                )
+              ],
+            ),
+          ],
+          centerTitle: true,
+        ),
+        // body: Center(child: Text("testando"),)
+        body: this._isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    children: <Widget>[
+                      this._isLoading
+                          ? Text('')
+                          : Text(
+                              this._ecordel.tittle,
+                              style: TextStyle(
+                                  fontSize: 20 * _textSizeMultiplier,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                      Padding(padding: EdgeInsets.all(15)),
+                      Text(
+                        this._ecordel.content,
+                        style: TextStyle(fontSize: 20 * _textSizeMultiplier),
+                      ),
+                      Text("Autor: ${this._ecordel.author}")
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }

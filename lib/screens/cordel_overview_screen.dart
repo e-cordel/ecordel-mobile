@@ -34,40 +34,42 @@ class _CordelOverviewScreenState extends State<CordelOverviewScreen> {
   Widget build(BuildContext conteRxt) {
     final eCordelProvider = Provider.of<EcordelProvider>(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Meus Cordeis'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: EcordelSearch());
-            },
-          ),
-        ],
-      ),
-      body: this._isLoading == true
-          ? Center(child: CircularProgressIndicator())
-          : Container(
-              color: Theme.of(context).backgroundColor,
-              child: GridView.count(
-                childAspectRatio: 0.75,
-                primary: false,
-                padding: const EdgeInsets.all(20),
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                children:
-                    List.generate(eCordelProvider.getAll().length, (index) {
-                  Ecordel cordel = eCordelProvider.getAll().elementAt(index);
-                  return ChangeNotifierProvider.value(
-                    value: cordel,
-                    child: BookWidget(),
-                  );
-                }),
-              ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('Meus Cordeis'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: EcordelSearch());
+              },
             ),
+          ],
+        ),
+        body: this._isLoading
+            ? Center(child: CircularProgressIndicator())
+            : Container(
+                color: Theme.of(context).backgroundColor,
+                child: GridView.count(
+                  childAspectRatio: 0.75,
+                  primary: false,
+                  padding: const EdgeInsets.all(20),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  children:
+                      List.generate(eCordelProvider.getAll().length, (index) {
+                    Ecordel cordel = eCordelProvider.getAll().elementAt(index);
+                    return ChangeNotifierProvider.value(
+                      value: cordel,
+                      child: BookWidget(),
+                    );
+                  }),
+                ),
+              ),
+      ),
     );
   }
 }
