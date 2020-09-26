@@ -103,7 +103,7 @@ class _ReadScreenState extends State<ReadScreen> {
                       this._isLoading
                           ? Text('')
                           : Text(
-                              this._ecordel.tittle,
+                              this._ecordel.title,
                               style: TextStyle(
                                   fontSize: 20 * _textSizeMultiplier,
                                   fontWeight: FontWeight.bold),

@@ -10,22 +10,22 @@ class CordelOverviewScreen extends StatefulWidget {
 }
 
 class _CordelOverviewScreenState extends State<CordelOverviewScreen> {
-  bool _isLoading = false;
-  bool _isInit = true;
+  bool _isLoading = true;
+  bool _firstInit = true;
+
   @override
   void didChangeDependencies() {
-    if (_isInit) {
+    if (_firstInit) {
       setState(() {
-        this._isLoading = true;
-      });
-
-      Provider.of<EcordelProvider>(context).fethAll().then((_) {
-        setState(() {
-          this._isLoading = false;
-        });
+        _firstInit = false;
       });
     }
-    this._isInit = false;
+
+    Provider.of<EcordelProvider>(context).fethAll().then((_) {
+      setState(() {
+        this._isLoading = false;
+      });
+    });
 
     super.didChangeDependencies();
   }
@@ -59,14 +59,29 @@ class _CordelOverviewScreenState extends State<CordelOverviewScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  children:
-                      List.generate(eCordelProvider.getAll().length, (index) {
-                    Ecordel cordel = eCordelProvider.getAll().elementAt(index);
-                    return ChangeNotifierProvider.value(
-                      value: cordel,
-                      child: BookWidget(),
+                  children: () {
+                    setState(() {
+                      this._isLoading = true;
+                    });
+
+                    eCordelProvider.fethAll().then((value) {
+                      setState(() {
+                        this._isLoading = false;
+                      });
+                    });
+
+                    return List.generate(
+                      eCordelProvider.getAll().length,
+                      (index) {
+                        Ecordel cordel =
+                            eCordelProvider.getAll().elementAt(index);
+                        return ChangeNotifierProvider.value(
+                          value: cordel,
+                          child: BookWidget(),
+                        );
+                      },
                     );
-                  }),
+                  }(),
                 ),
               ),
       ),

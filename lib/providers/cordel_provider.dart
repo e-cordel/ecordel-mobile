@@ -10,20 +10,16 @@ class EcordelProvider with ChangeNotifier {
   List<Ecordel> _cordeis = [];
 
   Future<void> fethAll() async {
-    try {
-      final response = await http.get("${this.baseUrl}");
+    final response = await http.get("${this.baseUrl}");
 
-      if (response.statusCode == 200) {
-        final body = jsonDecode(response.body)['content'];
-        List<Map<String, dynamic>> parsed = body.cast<Map<String, dynamic>>();
-        final ecordelMapped = parsed.toList();
-        this._cordeis = ecordelMapped
-            .map<Ecordel>((json) => Ecordel.fromJson(json))
-            .toList();
-      }
-    } catch (e) {
-      throw (e);
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body)['content'];
+      List<Map<String, dynamic>> parsed = body.cast<Map<String, dynamic>>();
+      final ecordelMapped = parsed.toList();
+      this._cordeis =
+          ecordelMapped.map<Ecordel>((json) => Ecordel.fromMap(json)).toList();
     }
+
     notifyListeners();
   }
 
@@ -32,7 +28,7 @@ class EcordelProvider with ChangeNotifier {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      final Ecordel ecordel = Ecordel.fromJson(body);
+      final Ecordel ecordel = Ecordel.fromMap(body);
 
       return ecordel;
     } else {
@@ -54,7 +50,7 @@ class EcordelProvider with ChangeNotifier {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      final Ecordel ecordel = Ecordel.fromJson(body);
+      final Ecordel ecordel = Ecordel.fromMap(body);
 
       return ecordel;
     } else {
