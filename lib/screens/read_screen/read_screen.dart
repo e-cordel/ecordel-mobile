@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/cordel_provider.dart';
-import '../models/ecordel.dart';
+
+import '../../providers/cordel_provider.dart';
+import '../../models/ecordel.dart';
 
 class ReadScreen extends StatefulWidget {
   final int cordelId;
@@ -72,7 +73,7 @@ class _ReadScreenState extends State<ReadScreen> {
             Row(
               children: <Widget>[
                 Text(
-                  "Texto: ",
+                  "Tamanho do texto: ",
                   style: TextStyle(fontSize: 20),
                 ),
                 IconButton(
@@ -102,18 +103,12 @@ class _ReadScreenState extends State<ReadScreen> {
                     children: <Widget>[
                       this._isLoading
                           ? Text('')
-                          : Text(
-                              this._ecordel.title,
-                              style: TextStyle(
-                                  fontSize: 20 * _textSizeMultiplier,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                      Padding(padding: EdgeInsets.all(15)),
+                          : Image.network(this._ecordel.xilogravura),
                       Text(
                         this._ecordel.content,
                         style: TextStyle(fontSize: 20 * _textSizeMultiplier),
                       ),
-                      Text("Autor: ${this._ecordel.author}")
+                      Text("Autor: ${this._ecordel.author['name']}")
                     ],
                   ),
                 ),
