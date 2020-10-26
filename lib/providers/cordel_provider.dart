@@ -4,23 +4,28 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/ecordel.dart';
+import '../configs/api_configs.dart';
 
 class EcordelProvider with ChangeNotifier {
-  String baseUrl = "https://ecordel-restapi.herokuapp.com/cordels";
+  String baseUrl = apiUrl;
   List<Ecordel> _cordeis = [];
+  Map<String, String> request;
 
   Future<void> fethAll() async {
-    final response = await http.get("${this.baseUrl}");
+    try {
+      final response = await http.get("${this.baseUrl}/cordels");
 
-    if (response.statusCode == 200) {
       final body = jsonDecode(response.body)['content'];
       List<Map<String, dynamic>> parsed = body.cast<Map<String, dynamic>>();
       final ecordelMapped = parsed.toList();
       this._cordeis =
           ecordelMapped.map<Ecordel>((json) => Ecordel.fromMap(json)).toList();
-    }
 
-    notifyListeners();
+      notifyListeners();
+      // }
+    } catch (e) {
+      throw (e);
+    }
   }
 
   Future<Ecordel> findById(double id) async {
