@@ -1,10 +1,11 @@
+import 'package:ecordel/app/commons/models/ecordel.dart';
+import 'package:ecordel/app/commons/providers/cordel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/cordel_provider.dart';
-import '../../models/ecordel.dart';
-
 class ReadScreen extends StatefulWidget {
+  static String route = '/readScreen';
+
   final int cordelId;
   ReadScreen({this.cordelId});
 
@@ -50,10 +51,13 @@ class _ReadScreenState extends State<ReadScreen> {
         this._isLoading = true;
       });
 
+      print('GETTING CORDEL ${widget.cordelId}');
+
       Provider.of<EcordelProvider>(context, listen: false)
           .fethById(widget.cordelId)
           .then((cordel) {
         this._ecordel = cordel;
+
         setState(() {
           this._isLoading = false;
         });
@@ -103,12 +107,12 @@ class _ReadScreenState extends State<ReadScreen> {
                     children: <Widget>[
                       this._isLoading
                           ? Text('')
-                          : Image.network(this._ecordel.xilogravura),
+                          : Image.network("${this._ecordel.xilogravura.url}"),
                       Text(
                         this._ecordel.content,
                         style: TextStyle(fontSize: 20 * _textSizeMultiplier),
                       ),
-                      Text("Autor: ${this._ecordel.author['name']}")
+                      Text("Autor: ${this._ecordel.author.name}")
                     ],
                   ),
                 ),

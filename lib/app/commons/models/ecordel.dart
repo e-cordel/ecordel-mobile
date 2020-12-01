@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import './author.dart';
+import 'xilogravura.dart';
 
-class Ecordel with ChangeNotifier {
+class Ecordel {
   int id;
-  Map<String, dynamic> author;
+  Author author;
   String title;
   String description;
   String content;
-  String xilogravura;
-
+  Xilogravura xilogravura;
   List<String> tags;
 
   Ecordel({
@@ -25,11 +25,11 @@ class Ecordel with ChangeNotifier {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'author': author,
+      'author': author?.toMap(),
       'title': title,
       'description': description,
       'content': content,
-      'xilogravura': xilogravura,
+      'xilogravura': xilogravura?.toMap(),
       'tags': tags,
     };
   }
@@ -39,11 +39,11 @@ class Ecordel with ChangeNotifier {
 
     return Ecordel(
       id: map['id'],
-      author: Map<String, dynamic>.from(map['author']),
+      author: Author.fromMap(map['author']),
       title: map['title'],
       description: map['description'],
       content: map['content'],
-      xilogravura: map['xilogravura'],
+      xilogravura: Xilogravura.fromMap(map['xilogravura']),
       tags: List<String>.from(map['tags']),
     );
   }
