@@ -19,14 +19,14 @@ class _ReadScreenState extends State<ReadScreen> {
       setState(() {
         this._textSizeMultiplier += 0.2;
       });
-      print(_textSizeMultiplier);
+
       return;
     }
     if (!addSize && this._textSizeMultiplier >= 1.2) {
       setState(() {
         this._textSizeMultiplier -= 0.2;
       });
-      print(_textSizeMultiplier);
+
       return;
     }
   }
@@ -50,8 +50,6 @@ class _ReadScreenState extends State<ReadScreen> {
       setState(() {
         this._isLoading = true;
       });
-
-      print('GETTING CORDEL ${widget.cordelId}');
 
       Provider.of<EcordelProvider>(context, listen: false)
           .fethById(widget.cordelId)

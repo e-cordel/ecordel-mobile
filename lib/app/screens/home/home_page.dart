@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'components/cordel_search_delegate.dart';
 import 'components/ecordel_card_widget.dart';
 import 'components/notification_icon_widget.dart';
+import 'components/section_category.dart';
 
 class HomeScreen extends StatefulWidget {
   static String route = '/home';
@@ -28,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<EcordelProvider>(context, listen: false)
           .getCordelSumary()
           .then((summary) {
-        print('Rodando dentro do didchange');
         setState(() {
           _cordelSummary = summary;
           this.screenSize = MediaQuery.of(context);
@@ -37,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }).catchError((error) {
         setState(() {
-          print(error);
           _errorOnFech = true;
           _isLoading = false;
           _firstBuild = false;
@@ -103,25 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(padding: EdgeInsets.only(top: 90)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.local_library,
-                  size: 25,
-                  color: Colors.black45,
-                ),
-                Padding(padding: EdgeInsets.all(6)),
-                Text(
-                  "Mais lidos",
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 25,
-                  ),
-                ),
-                // _buildCards()
-              ],
+            SectionCategory(
+              sectionName: 'Mais lidos',
             ),
             _buildCards()
           ],
@@ -146,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     } else {
       return Center(
-        child: Text('Nenhum cordel '),
+        child: Text('Ainda não há cordel nesta categoria'),
       );
     }
   }

@@ -49,26 +49,26 @@ class EcordelSearch extends SearchDelegate<Ecordel> {
       future: Provider.of<EcordelProvider>(context, listen: false)
           .searchByTitle(query),
       builder: (context, snapshot) {
-        List<CordelSummary> temp_result = [];
+        List<CordelSummary> tempResult = [];
 
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
-          temp_result = snapshot.data;
+          tempResult = snapshot.data;
         }
 
-        if (temp_result.length == 0) {
+        if (tempResult.length == 0) {
           return Center(child: Text('Nenhum cordel encontrado =('));
         } else {
-          return _buildGridView(temp_result);
+          return _buildGridView(tempResult);
         }
       },
     );
   }
 
-  _buildGridView(List<CordelSummary> results) {
+  Widget _buildGridView(List<CordelSummary> results) {
     return GridView.count(
       childAspectRatio: 0.75,
       primary: false,
@@ -76,12 +76,15 @@ class EcordelSearch extends SearchDelegate<Ecordel> {
       crossAxisCount: 2,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
-      children: List.generate(results.length, (index) {
-        Ecordel cordel = castToCordelFromSummary(results[index]);
-        return CordelCard(
-          cordel: cordel,
-        );
-      }),
+      children: List.generate(
+        results.length,
+        (index) {
+          Ecordel cordel = castToCordelFromSummary(results[index]);
+          return CordelCard(
+            cordel: cordel,
+          );
+        },
+      ),
     );
   }
 }
