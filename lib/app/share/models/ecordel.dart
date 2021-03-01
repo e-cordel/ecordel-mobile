@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:ecordel/app/commons/models/cordel_summary.dart';
-
 import './author.dart';
 import 'xilogravura.dart';
 
