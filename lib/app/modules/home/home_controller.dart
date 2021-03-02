@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
 
 import 'package:ecordel/app/share/repositores/ecordel_repository.dart';
@@ -18,15 +20,20 @@ abstract class _HomeControllerBase with Store {
   bool isLoading;
 
   @action
-  List<CordelSummaryViewModel> getSummary() {
+  Future<List<CordelSummaryViewModel>> getSummary() async {
+    await refreshSummary();
     return List.from(cordelsSummary);
   }
 
   @action
   Future<void> refreshSummary() async {
-    isLoading = true;
-    var summary = await ecordelRepositoryAPI.fetchCordelSumary();
-    cordelsSummary = ObservableList.of(summary);
-    isLoading = false;
+    try {
+      isLoading = true;
+      var summary = await ecordelRepositoryAPI.fetchCordelSumary();
+      cordelsSummary = ObservableList.of(summary);
+      isLoading = false;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

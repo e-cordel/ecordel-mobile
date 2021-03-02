@@ -9,7 +9,6 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         $HomeController,
-        Bind((i) => EcordelRepositoryAPI()),
       ];
 
   @override

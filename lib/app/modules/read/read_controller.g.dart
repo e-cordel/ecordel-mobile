@@ -35,6 +35,29 @@ mixin _$ReadController on _ReadControllerBase, Store {
     });
   }
 
+  final _$isLoadingAtom = Atom(name: '_ReadControllerBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  final _$fetchCordelByIdAsyncAction =
+      AsyncAction('_ReadControllerBase.fetchCordelById');
+
+  @override
+  Future<Ecordel> fetchCordelById(int id) {
+    return _$fetchCordelByIdAsyncAction.run(() => super.fetchCordelById(id));
+  }
+
   final _$_ReadControllerBaseActionController =
       ActionController(name: '_ReadControllerBase');
 
@@ -63,7 +86,8 @@ mixin _$ReadController on _ReadControllerBase, Store {
   @override
   String toString() {
     return '''
-fontScaleFactor: ${fontScaleFactor}
+fontScaleFactor: ${fontScaleFactor},
+isLoading: ${isLoading}
     ''';
   }
 }

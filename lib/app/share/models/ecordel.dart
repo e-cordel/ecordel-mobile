@@ -11,7 +11,6 @@ class Ecordel {
   String content;
   Xilogravura xilogravura;
   List<String> tags;
-
   Ecordel({
     this.id,
     this.author,

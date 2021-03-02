@@ -33,9 +33,8 @@ class EcordelRepositoryAPI implements EcordelRepository {
 
     try {
       final response = await dio.get(url);
-      Map<String, dynamic> json = jsonDecode(response.data);
-      final Ecordel ecordel = Ecordel.fromMap(json);
-      return ecordel;
+      Ecordel cordel = Ecordel.fromMap(response.data);
+      return cordel;
     } catch (e) {
       rethrow;
     }

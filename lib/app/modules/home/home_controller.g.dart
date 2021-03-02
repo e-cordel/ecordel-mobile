@@ -34,26 +34,19 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$getSummaryAsyncAction = AsyncAction('_HomeControllerBase.getSummary');
+
+  @override
+  Future<List<CordelSummaryViewModel>> getSummary() {
+    return _$getSummaryAsyncAction.run(() => super.getSummary());
+  }
+
   final _$refreshSummaryAsyncAction =
       AsyncAction('_HomeControllerBase.refreshSummary');
 
   @override
   Future<void> refreshSummary() {
     return _$refreshSummaryAsyncAction.run(() => super.refreshSummary());
-  }
-
-  final _$_HomeControllerBaseActionController =
-      ActionController(name: '_HomeControllerBase');
-
-  @override
-  List<CordelSummaryViewModel> getSummary() {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.getSummary');
-    try {
-      return super.getSummary();
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
   }
 
   @override
