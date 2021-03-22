@@ -13,17 +13,26 @@ Depois disso, faça o clone do projeto para o seu computador e execute a partir 
 
 
 ## Organização inicial do projeto
+A fim de melhor organizar o código e agilizar o desenvolvimento do aplitativo, o pacote [flutter_modular](https://pub.dev/packages/flutter_modular) da flutterando está sendo utilizado. Agora o projeto mobile vai utilizar o MobX como gestor de estados em vez do provider.
 
 A organização dos diretórios segue, mas não se limita, a seguinte lógica: 
  - app -> contém todo o APP.
- - commons -> tudo o que for disponível globalmente na aplicação.
- - screens -> cada tela criada será um novo subiretório de screens. componentes referentes a cada tela deve ficar dentro do seu respectivo diretório. Ex.: ecordel_card_widget.dart é utilizado apenas na home e na área de busca. Então esta deve residir dentro do diretório 'home'.
+ - modules -> os módulos do projeto. Pensou-se em separar cada tela em um módulo. Um módulo contém uma estrutura completa para funcionar, como: controllers, pages e eventualmente, models, componentes, etc.
+ - share -> tudo o que for disponível globalmente na aplicação, como configurações, modelos, repositórios e stores.
  
  ## Acesso a API
-O acesso a API para realizar testes é feita através do commons -> providers -> cordel_provider.dart. A URL da API está disponível em commons -> api_configs.dart
+ 
+O acesso a API para realizar testes é feita através do repositório disponível em share -> ecordel_repository.dart. A URL da API está disponível em share -> configs -> api_configs.dart
+
 
 
 ## Melhorias
-Esta é uma estrutura inicial do projeto que requer muitas modificações. Sinta-se  a vontade em nos ajudar.
+- Utilização do flutter_modular da flutterando
+- Uso do MobX para gestão de estados
+- Reestruturação da árvore de diretórios para melhor organização do código
+- Aplicação das práticas de clean code
+- Melhoria no tratamento de erros durante o fetch de dados.
+
+Esta é uma estrutura inicial do projeto que requer muitas modificações. Sinta-se a vontade em nos ajudar.
 
 
