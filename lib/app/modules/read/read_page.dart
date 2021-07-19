@@ -67,10 +67,7 @@ class _ReadPageState extends ModularState<ReadPage, ReadController> {
             Container(
               height: 260,
               width: 200,
-              child: Image.network(
-                cordel.xilogravura.url,
-                fit: BoxFit.contain,
-              ),
+              child: getImage( cordel ),
             ),
             Observer(builder: (_) {
               return Text(
@@ -83,6 +80,14 @@ class _ReadPageState extends ModularState<ReadPage, ReadController> {
         ),
       ),
     );
+  }
+
+  Widget getImage( Ecordel cordel ) {
+    String imageUrl = "https://ecordel.com.br/wp-content/uploads/2020/07/ebook.png";
+    if (cordel.xilogravura != null && cordel.xilogravura.url != null) {
+      imageUrl = cordel.xilogravura.url;
+    }
+    return Image.network( imageUrl, fit: BoxFit.contain );
   }
 
   Center buildProgressIndicator() {
