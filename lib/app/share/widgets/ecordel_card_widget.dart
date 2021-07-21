@@ -24,7 +24,7 @@ class CordelCard extends StatelessWidget {
             Flexible(
               flex: 10,
               child: Image.network(
-                cordelSummary.xilogravuraUrl,
+                cordelSummary.xilogravuraUrl == null ? "https://ecordel.com.br/wp-content/uploads/2020/07/ebook.png" : cordelSummary.xilogravuraUrl,
                 fit: BoxFit.fill,
               ),
             ),

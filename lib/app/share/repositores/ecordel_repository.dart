@@ -4,12 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
-import '../configs/api_config.dart';
+import '../configs/env_config.dart';
 import '../models/ecordel.dart';
 
 class EcordelRepositoryAPI implements EcordelRepository {
   var dio = Modular.get<Dio>();
-  String baseUrl = API_URL;
+  String baseUrl = EnvironmentConfig.API_URL;
 
   Map<String, String> request;
 
