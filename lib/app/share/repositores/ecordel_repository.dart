@@ -2,21 +2,19 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
 import '../configs/env_config.dart';
 import '../models/ecordel.dart';
 
 class EcordelRepositoryAPI implements EcordelRepository {
   var dio = Modular.get<Dio>();
-  String baseUrl = EnvironmentConfig.API_URL;
+  String cordelsUrl = EnvironmentConfig.API_URL  + '/cordels';
 
   Map<String, String> request;
 
   Future<List<CordelSummaryViewModel>> fetchCordelSumary() async {
-    final String url = baseUrl + '/cordels';
     try {
-      final response = await dio.get(url);
+      final response = await dio.get(cordelsUrl);
 
       var cordelsSummary = (response.data['content'] as List).map((e) {
         return CordelSummaryViewModel.fromMap(e);
@@ -29,7 +27,7 @@ class EcordelRepositoryAPI implements EcordelRepository {
   }
 
   Future<Ecordel> fethById(int id) async {
-    final String url = baseUrl + "/cordels/" + "$id";
+    final String url = '$cordelsUrl/$id';
 
     try {
       final response = await dio.get(url);
@@ -41,7 +39,7 @@ class EcordelRepositoryAPI implements EcordelRepository {
   }
 
   Future<List<CordelSummaryViewModel>> searchByTitle(String title) async {
-    final String url = "$baseUrl/cordels/?title=$title";
+    final String url = '$cordelsUrl?title=$title';
     try {
       final response = await dio.get(url);
       var decoded = jsonDecode(response.data)['content'];
