@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'read_controller.dart';
+import 'package:ecordel/app/share/utils/images.dart';
 
 class ReadPage extends StatefulWidget {
   final String title;
@@ -67,7 +68,7 @@ class _ReadPageState extends ModularState<ReadPage, ReadController> {
             Container(
               height: 260,
               width: 200,
-              child: getImage( cordel ),
+              child: getXilogravuraImageOrDefault( cordel.xilogravura?.url, BoxFit.contain),
             ),
             Observer(builder: (_) {
               return Text(
@@ -80,14 +81,6 @@ class _ReadPageState extends ModularState<ReadPage, ReadController> {
         ),
       ),
     );
-  }
-
-  Widget getImage( Ecordel cordel ) {
-    String imageUrl = "https://ecordel.com.br/wp-content/uploads/2020/07/ebook.png";
-    if (cordel.xilogravura != null && cordel.xilogravura.url != null) {
-      imageUrl = cordel.xilogravura.url;
-    }
-    return Image.network( imageUrl, fit: BoxFit.contain );
   }
 
   Center buildProgressIndicator() {

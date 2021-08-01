@@ -1,7 +1,8 @@
-import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
+import 'package:ecordel/app/share/utils/images.dart';
 
 class CordelCard extends StatelessWidget {
   final CordelSummaryViewModel cordelSummary;
@@ -23,10 +24,7 @@ class CordelCard extends StatelessWidget {
           children: [
             Flexible(
               flex: 10,
-              child: Image.network(
-                cordelSummary.xilogravuraUrl == null ? "https://ecordel.com.br/wp-content/uploads/2020/07/ebook.png" : cordelSummary.xilogravuraUrl,
-                fit: BoxFit.fill,
-              ),
+              child: getXilogravuraImageOrDefault( cordelSummary.xilogravuraUrl, BoxFit.fill )
             ),
             Flexible(
               flex: 1,
