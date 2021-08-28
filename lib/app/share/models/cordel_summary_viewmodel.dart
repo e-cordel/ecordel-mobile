@@ -5,11 +5,12 @@ class CordelSummaryViewModel {
   final String title;
   final String xilogravuraUrl;
   final String authorName;
+
   CordelSummaryViewModel({
-    this.id,
-    this.title,
-    this.xilogravuraUrl,
-    this.authorName,
+    required this.id,
+    required this.title,
+    required this.xilogravuraUrl,
+    required this.authorName,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,8 +23,6 @@ class CordelSummaryViewModel {
   }
 
   factory CordelSummaryViewModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return CordelSummaryViewModel(
       id: map['id'],
       title: map['title'],
@@ -36,4 +35,9 @@ class CordelSummaryViewModel {
 
   factory CordelSummaryViewModel.fromJson(String source) =>
       CordelSummaryViewModel.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'CordelSummaryViewModel(id: $id, title: $title, xilogravuraUrl: $xilogravuraUrl, authorName: $authorName)';
+  }
 }

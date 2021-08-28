@@ -8,9 +8,9 @@ import '../models/ecordel.dart';
 
 class EcordelRepositoryAPI implements EcordelRepository {
   var dio = Modular.get<Dio>();
-  String cordelsUrl = EnvironmentConfig.API_URL  + '/cordels';
+  String cordelsUrl = EnvironmentConfig.API_URL + '/cordels';
 
-  Map<String, String> request;
+  Map<String, String>? request;
 
   Future<List<CordelSummaryViewModel>> fetchCordelSumary() async {
     try {

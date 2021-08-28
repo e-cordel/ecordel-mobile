@@ -8,8 +8,8 @@ class CordelCard extends StatelessWidget {
   final CordelSummaryViewModel cordelSummary;
 
   const CordelCard({
-    Key key,
-    this.cordelSummary,
+    required Key key,
+    required this.cordelSummary,
   }) : super(key: key);
 
   @override
@@ -23,9 +23,9 @@ class CordelCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
-              flex: 10,
-              child: getXilogravuraImageOrDefault( cordelSummary.xilogravuraUrl, BoxFit.fill )
-            ),
+                flex: 10,
+                child: getXilogravuraImageOrDefault(
+                    cordelSummary.xilogravuraUrl, BoxFit.fill)),
             Flexible(
               flex: 1,
               child: Text(

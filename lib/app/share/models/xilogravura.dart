@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import './xilografo.dart';
+import 'package:ecordel/app/share/models/author.dart';
 
 class Xilogravura {
-  int id;
+  int? id;
   String url;
-  String description;
-  Xilografo xilografo;
+  String? description;
+  Author? xilografo;
 
   Xilogravura({
     this.id,
-    this.url,
+    required this.url,
     this.description,
     this.xilografo,
   });
@@ -25,13 +25,11 @@ class Xilogravura {
   }
 
   factory Xilogravura.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Xilogravura(
       id: map['id'],
       url: map['url'],
       description: map['description'],
-      xilografo: Xilografo.fromMap(map['xilografo']),
+      xilografo: Author.fromMap(map['xilografo']),
     );
   }
 
@@ -39,4 +37,9 @@ class Xilogravura {
 
   factory Xilogravura.fromJson(String source) =>
       Xilogravura.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'Xilogravura(id: $id, url: $url, description: $description, xilografo: $xilografo)';
+  }
 }

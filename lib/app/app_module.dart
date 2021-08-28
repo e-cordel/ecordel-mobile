@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:ecordel/app/modules/read/read_module.dart';
 import 'package:ecordel/app/share/repositores/ecordel_repository.dart';
 
-import 'app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:ecordel/app/app_widget.dart';

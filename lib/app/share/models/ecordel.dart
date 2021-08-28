@@ -7,14 +7,15 @@ class Ecordel {
   int id;
   Author author;
   String title;
-  String description;
-  String content;
-  Xilogravura xilogravura;
-  List<String> tags;
+  String? description;
+  String? content;
+  Xilogravura? xilogravura;
+  List<String>? tags;
+
   Ecordel({
-    this.id,
-    this.author,
-    this.title,
+    required this.id,
+    required this.author,
+    required this.title,
     this.description,
     this.content,
     this.xilogravura,
@@ -24,7 +25,7 @@ class Ecordel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'author': author?.toMap(),
+      'author': author.toMap(),
       'title': title,
       'description': description,
       'content': content,
@@ -34,8 +35,6 @@ class Ecordel {
   }
 
   factory Ecordel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Ecordel(
       id: map['id'],
       author: Author.fromMap(map['author']),

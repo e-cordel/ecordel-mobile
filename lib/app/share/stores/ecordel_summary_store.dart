@@ -16,7 +16,7 @@ abstract class _EcordelSymmaryStore with Store {
 
   @action
   void setAll(List<CordelSummaryViewModel> ecordelList) {
-    ecordels = List.from(ecordelList);
+    this.ecordels = ObservableList<CordelSummaryViewModel>.of(ecordelList);
   }
 
   @action
