@@ -1,15 +1,12 @@
 import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
 import 'package:ecordel/app/share/widgets/ecordel_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mobx/mobx.dart';
 import 'home_controller.dart';
-import 'package:mobx/src/api/observable_collections.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  const HomePage({Key? key, this.title = "Home"}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -37,7 +34,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       ),
       body: FutureBuilder(
         future: controller.getSummary(),
-        builder: (_, snapshot) {
+        builder: (_, AsyncSnapshot<List<CordelSummaryViewModel>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
@@ -45,7 +42,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               child: Text('Um erro ocorreu ao obter os cordeis =('),
             );
           } else if (snapshot.hasData) {
-            return buildContent(snapshot.data);
+            return buildContent(snapshot.data!);
           }
           return Center(
             child: Text('Um erro desconhecido ocorreu'),

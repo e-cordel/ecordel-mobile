@@ -4,13 +4,13 @@ import 'package:ecordel/app/share/models/author.dart';
 
 class Xilogravura {
   int? id;
-  String url;
+  String? url;
   String? description;
   Author? xilografo;
 
   Xilogravura({
     this.id,
-    required this.url,
+    this.url,
     this.description,
     this.xilografo,
   });

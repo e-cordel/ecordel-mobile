@@ -8,7 +8,9 @@ import 'package:ecordel/app/share/utils/images.dart';
 class ReadPage extends StatefulWidget {
   final String title;
   final int cordelId;
-  const ReadPage({Key key, this.title = "", this.cordelId}) : super(key: key);
+
+  ReadPage({Key? key, this.title = "", required this.cordelId})
+      : super(key: key);
 
   @override
   _ReadPageState createState() => _ReadPageState();
@@ -51,7 +53,7 @@ class _ReadPageState extends ModularState<ReadPage, ReadController> {
                   child: Text('Um erro ocorreu ao abrir este cordel'),
                 );
               } else if (snapshot.hasData) {
-                return buildContent(snapshot.data);
+                return buildContent(snapshot.data as Ecordel);
               }
               return Center(
                 child: Text('Um erro desconhecido ocorreu'),
@@ -68,11 +70,12 @@ class _ReadPageState extends ModularState<ReadPage, ReadController> {
             Container(
               height: 260,
               width: 200,
-              child: getXilogravuraImageOrDefault( cordel.xilogravura?.url, BoxFit.contain),
+              child: getXilogravuraImageOrDefault(
+                  cordel.xilogravura?.url, BoxFit.contain),
             ),
             Observer(builder: (_) {
               return Text(
-                cordel.content,
+                cordel.content!,
                 style: TextStyle(fontSize: 20 * controller.fontScaleFactor),
               );
             }),

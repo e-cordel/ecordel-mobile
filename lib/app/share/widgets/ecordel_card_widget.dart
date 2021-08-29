@@ -8,7 +8,7 @@ class CordelCard extends StatelessWidget {
   final CordelSummaryViewModel cordelSummary;
 
   const CordelCard({
-    required Key key,
+    Key? key,
     required this.cordelSummary,
   }) : super(key: key);
 

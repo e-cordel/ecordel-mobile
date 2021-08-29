@@ -17,7 +17,7 @@ abstract class _HomeControllerBase with Store {
   var cordelsSummary = ObservableList<CordelSummaryViewModel>();
 
   @observable
-  bool isLoading;
+  bool isLoading = false;
 
   @action
   Future<List<CordelSummaryViewModel>> getSummary() async {
