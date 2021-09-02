@@ -2,13 +2,13 @@ import 'dart:convert';
 
 class Author {
   int? id;
-  String name;
+  String? name;
   String? about;
   String? email;
 
   Author({
     this.id,
-    required this.name,
+    this.name,
     this.about,
     this.email,
   });
@@ -22,7 +22,10 @@ class Author {
     };
   }
 
-  factory Author.fromMap(Map<String, dynamic> map) {
+  static dynamic fromMap(Map<String, dynamic>? map) {
+    if (map == null) {
+      return Author();
+    }
     return Author(
       id: map['id'],
       name: map['name'],

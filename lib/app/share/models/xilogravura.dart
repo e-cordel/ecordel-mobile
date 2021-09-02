@@ -24,7 +24,11 @@ class Xilogravura {
     };
   }
 
-  factory Xilogravura.fromMap(Map<String, dynamic> map) {
+  static fromMap(Map<String, dynamic>? map) {
+    if (map == null) {
+      return Xilogravura();
+    }
+
     return Xilogravura(
       id: map['id'],
       url: map['url'],
