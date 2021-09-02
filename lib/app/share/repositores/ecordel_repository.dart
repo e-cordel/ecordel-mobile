@@ -28,14 +28,16 @@ class EcordelRepositoryAPI implements EcordelRepository {
 
   Future<Ecordel> fethById(int id) async {
     final String url = '$cordelsUrl/$id';
+    var response;
 
     try {
-      final response = await dio.get(url);
-      Ecordel cordel = Ecordel.fromMap(response.data);
-      return cordel;
+      response = await dio.get(url);
     } catch (e) {
       rethrow;
     }
+
+    Ecordel cordel = Ecordel.fromMap(response.data);
+    return cordel;
   }
 
   Future<List<CordelSummaryViewModel>> searchByTitle(String title) async {

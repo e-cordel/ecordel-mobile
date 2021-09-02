@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:ecordel/app/app_controller.dart';
+
 import 'package:ecordel/app/modules/read/read_module.dart';
 import 'package:ecordel/app/share/repositores/ecordel_repository.dart';
 
@@ -11,7 +11,6 @@ import 'package:ecordel/app/modules/home/home_module.dart';
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
-        $AppController,
         Bind((i) => Dio()),
         Bind((i) => EcordelRepositoryAPI()),
       ];

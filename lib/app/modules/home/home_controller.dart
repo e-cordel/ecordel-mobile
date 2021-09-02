@@ -1,12 +1,8 @@
 import 'dart:async';
-
-import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
-
-import 'package:ecordel/app/share/repositores/ecordel_repository.dart';
-
 import 'package:mobx/mobx.dart';
+import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
+import 'package:ecordel/app/share/repositores/ecordel_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 part 'home_controller.g.dart';
 
 @Injectable()
