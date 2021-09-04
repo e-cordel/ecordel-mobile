@@ -22,5 +22,4 @@ jobs:
       - run: flutter pub get
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - run: flutter test
-      - run: flutter build apk
-      
+      - run: flutter build apk --debug --split-per-abi
