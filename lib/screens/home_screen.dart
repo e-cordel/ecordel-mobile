@@ -1,6 +1,6 @@
 import 'package:ecordel/repositores/ecordel_repository.dart';
 
-import '../models/cordel_summary_viewmodel.dart';
+import '../models/cordel_summary.dart';
 import 'package:ecordel/widgets/ecordel_card.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('e-cordel'),
       ),
-      body: FutureBuilder<List<CordelSummaryViewModel>>(
+      body: FutureBuilder<List<CordelSummary>>(
         future: api.getSummaries(),
         builder: (
           context,
@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildGridView(List<CordelSummaryViewModel> cordels) {
+  Widget buildGridView(List<CordelSummary> cordels) {
     return GridView.builder(
       padding: EdgeInsets.all(10),
       itemCount: cordels.length,

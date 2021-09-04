@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import '../models/cordel_summary_viewmodel.dart';
+import '../models/cordel_summary.dart';
 import '../configs/env_config.dart';
 import '../models/ecordel.dart';
 
@@ -13,12 +12,12 @@ class EcordelRepositoryAPI implements EcordelRepository {
 
   Map<String, String>? request;
 
-  Future<List<CordelSummaryViewModel>> getSummaries() async {
+  Future<List<CordelSummary>> getSummaries() async {
     try {
       final response = await dio.get("$cordelsUrl/summaries");
 
       var cordelsSummary = (response.data['content'] as List).map((e) {
-        return CordelSummaryViewModel.fromMap(e);
+        return CordelSummary.fromMap(e);
       }).toList();
 
       return cordelsSummary;
@@ -42,7 +41,7 @@ class EcordelRepositoryAPI implements EcordelRepository {
     return cordel;
   }
 
-  Future<List<CordelSummaryViewModel>> searchByTitle(String title) async {
+  Future<List<CordelSummary>> searchByTitle(String title) async {
     final String url = '$cordelsUrl?title=$title';
     try {
       final response = await dio.get(url);
@@ -50,8 +49,8 @@ class EcordelRepositoryAPI implements EcordelRepository {
 
       List<Map<String, dynamic>> parsed = List.from(decoded);
 
-      return parsed.map<CordelSummaryViewModel>((e) {
-        var ecordelSummary = CordelSummaryViewModel.fromMap(e);
+      return parsed.map<CordelSummary>((e) {
+        var ecordelSummary = CordelSummary.fromMap(e);
         return ecordelSummary;
       }).toList();
     } catch (e) {
@@ -61,7 +60,7 @@ class EcordelRepositoryAPI implements EcordelRepository {
 }
 
 abstract class EcordelRepository {
-  Future<List<CordelSummaryViewModel>> getSummaries() async {
+  Future<List<CordelSummary>> getSummaries() async {
     throw UnimplementedError();
   }
 
@@ -69,7 +68,7 @@ abstract class EcordelRepository {
     throw UnimplementedError();
   }
 
-  Future<List<CordelSummaryViewModel>> searchByTitle(String title) async {
+  Future<List<CordelSummary>> searchByTitle(String title) async {
     throw UnimplementedError();
   }
 }

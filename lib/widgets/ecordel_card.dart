@@ -1,10 +1,10 @@
-import '../models/cordel_summary_viewmodel.dart';
+import '../models/cordel_summary.dart';
 import 'package:ecordel/screens/read_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecordel/models/author.dart';
 
 class EcordelCard extends StatelessWidget {
-  CordelSummaryViewModel cordel;
+  CordelSummary cordel;
 
   EcordelCard({required this.cordel});
 

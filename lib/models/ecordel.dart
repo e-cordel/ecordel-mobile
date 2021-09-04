@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import './author.dart';
-import 'xilogravura.dart';
 
 class Ecordel {
   int id;
@@ -9,7 +8,7 @@ class Ecordel {
   String title;
   String? description;
   String? content;
-  Xilogravura? xilogravura;
+  String? xilogravuraUrl;
   List<String>? tags;
 
   Ecordel({
@@ -18,7 +17,7 @@ class Ecordel {
     required this.title,
     this.description,
     this.content,
-    this.xilogravura,
+    this.xilogravuraUrl,
     this.tags,
   });
 
@@ -29,7 +28,7 @@ class Ecordel {
       'title': title,
       'description': description,
       'content': content,
-      'xilogravura': xilogravura?.toMap(),
+      'xilogravuraUrl': xilogravuraUrl,
       'tags': tags,
     };
   }
@@ -41,7 +40,7 @@ class Ecordel {
       title: map['title'],
       description: map['description'],
       content: map['content'],
-      xilogravura: Xilogravura.fromMap(map['xilogravura']),
+      xilogravuraUrl: map['xilogravuraUrl'],
       tags: List<String>.from(map['tags']),
     );
   }

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-class CordelSummaryViewModel {
+class CordelSummary {
   final int id;
   final String title;
   final String xilogravuraUrl;
   final String authorName;
 
-  CordelSummaryViewModel(
+  CordelSummary(
       {required this.id,
       required this.title,
       required this.authorName,
@@ -21,8 +21,8 @@ class CordelSummaryViewModel {
     };
   }
 
-  factory CordelSummaryViewModel.fromMap(Map<String, dynamic> map) {
-    return CordelSummaryViewModel(
+  factory CordelSummary.fromMap(Map<String, dynamic> map) {
+    return CordelSummary(
       id: map['id'],
       title: map['title'],
       xilogravuraUrl: map['xilogravuraUrl'],
@@ -32,8 +32,8 @@ class CordelSummaryViewModel {
 
   String toJson() => json.encode(toMap());
 
-  factory CordelSummaryViewModel.fromJson(String source) =>
-      CordelSummaryViewModel.fromMap(json.decode(source));
+  factory CordelSummary.fromJson(String source) =>
+      CordelSummary.fromMap(json.decode(source));
 
   @override
   String toString() {

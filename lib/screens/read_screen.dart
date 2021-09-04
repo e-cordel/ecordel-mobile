@@ -1,7 +1,5 @@
-import 'package:ecordel/app/share/models/ecordel.dart';
+import '../models/ecordel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class ReadScreen extends StatefulWidget {
   static const String routeName = '/read-screen';
