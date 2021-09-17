@@ -14,7 +14,8 @@ class EcordelApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'E-Cordel',
-      theme: ThemeData(primaryColor: Colors.blue),
+      theme:
+          ThemeData(primarySwatch: Colors.orange, primaryColor: Colors.black),
       home: HomeScreen(),
     );
   }

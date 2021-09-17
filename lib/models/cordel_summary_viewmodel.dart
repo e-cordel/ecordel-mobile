@@ -3,13 +3,13 @@ import 'dart:convert';
 class CordelSummaryViewModel {
   final int id;
   final String title;
-  final String xilogravuraUrl;
+  final String? xilogravuraUrl;
   final String authorName;
 
   CordelSummaryViewModel({
     required this.id,
     required this.title,
-    required this.xilogravuraUrl,
+    this.xilogravuraUrl,
     required this.authorName,
   });
 
