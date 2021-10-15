@@ -27,6 +27,7 @@ environment:
   sdk: ">=2.13.0 <3.0.0"
 
 dependencies:
+  provider: 
   dio: ^4.0.0
   flutter_mobx: ^2.0.2
   mobx: ^2.0.4

@@ -1,4 +1,4 @@
-import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
+import '../models/cordel_summary_viewmodel.dart';
 import 'package:ecordel/app/share/models/author.dart';
 import 'package:ecordel/app/share/models/ecordel.dart';
 import 'package:ecordel/app/share/models/xilogravura.dart';

@@ -2,17 +2,17 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:ecordel/app/share/models/cordel_summary_viewmodel.dart';
+import '../models/cordel_summary_viewmodel.dart';
 import '../configs/env_config.dart';
 import '../models/ecordel.dart';
 
 class EcordelRepositoryAPI implements EcordelRepository {
-  var dio = Modular.get<Dio>();
+  var dio = Dio();
   String cordelsUrl = EnvironmentConfig.API_URL + '/cordels';
 
   Map<String, String>? request;
 
-  Future<List<CordelSummaryViewModel>> fetchCordelSumary() async {
+  Future<List<CordelSummaryViewModel>> getCordelSumary() async {
     try {
       final response = await dio.get(cordelsUrl);
 
@@ -26,7 +26,8 @@ class EcordelRepositoryAPI implements EcordelRepository {
     }
   }
 
-  Future<Ecordel> fethById(int id) async {
+  @override
+  Future<Ecordel> getById(int id) async {
     final String url = '$cordelsUrl/$id';
     var response;
 
@@ -56,26 +57,10 @@ class EcordelRepositoryAPI implements EcordelRepository {
       rethrow;
     }
   }
-
-  @override
-  Future<Ecordel> getById(int id) {
-    // TODO: implement getById
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<Ecordel>> fetchAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
-  }
 }
 
 abstract class EcordelRepository {
-  Future<List<Ecordel>> fetchAll() async {
-    throw UnimplementedError();
-  }
-
-  Future<List<CordelSummaryViewModel>> fetchCordelSumary() async {
+  Future<List<CordelSummaryViewModel>> getCordelSumary() async {
     throw UnimplementedError();
   }
 
