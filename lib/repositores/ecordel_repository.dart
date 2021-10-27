@@ -7,14 +7,15 @@ import '../configs/env_config.dart';
 import '../models/ecordel.dart';
 
 class EcordelRepositoryAPI implements EcordelRepository {
-  var dio = Dio();
-  String cordelsUrl = EnvironmentConfig.API_URL + '/cordels';
+
+  final Dio dio = Dio();
+  final String cordelsUrl = EnvironmentConfig.API_URL + '/cordels';
 
   Map<String, String>? request;
 
-  Future<List<CordelSummaryViewModel>> getCordelSumary() async {
+  Future<List<CordelSummaryViewModel>> getSummaries() async {
     try {
-      final response = await dio.get(cordelsUrl);
+      final response = await dio.get("$cordelsUrl/summaries");
 
       var cordelsSummary = (response.data['content'] as List).map((e) {
         return CordelSummaryViewModel.fromMap(e);
@@ -60,7 +61,7 @@ class EcordelRepositoryAPI implements EcordelRepository {
 }
 
 abstract class EcordelRepository {
-  Future<List<CordelSummaryViewModel>> getCordelSumary() async {
+  Future<List<CordelSummaryViewModel>> getSummaries() async {
     throw UnimplementedError();
   }
 
