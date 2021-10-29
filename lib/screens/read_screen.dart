@@ -1,3 +1,6 @@
+import 'package:ecordel/repositores/ecordel_repository.dart';
+import 'package:ecordel/utils/images.dart';
+
 import '../models/ecordel.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +18,8 @@ class ReadScreen extends StatefulWidget {
 }
 
 class _ReadScreenState extends State<ReadScreen> {
+  final api = EcordelRepositoryAPI();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,55 +47,56 @@ class _ReadScreenState extends State<ReadScreen> {
           centerTitle: true,
         ),
         body: Center(
-          child: Text('Teste'),
-        )
-        // FutureBuilder(
-        //     future: controller.fetchCordelById(widget.cordelId),
-        //     builder: (_, snapshot) {
-        //       if (snapshot.connectionState == ConnectionState.waiting) {
-        //         return Center(child: CircularProgressIndicator());
-        //       } else if (snapshot.hasError) {
-        //         return Center(
-        //           child: Text('Um erro ocorreu ao abrir este cordel'),
-        //         );
-        //       } else if (snapshot.hasData) {
-        //         return buildContent(snapshot.data as Ecordel);
-        //       }
-        //       return Center(
-        //         child: Text('Um erro desconhecido ocorreu'),
-        //       );
-        //     }),
-        );
+          child: FutureBuilder(
+              future: api.getById(widget.cordelId),
+              builder: (_, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Um erro ocorreu ao abrir este cordel'),
+                  );
+                } else if (snapshot.hasData) {
+                  return buildContent(snapshot.data as Ecordel);
+                }
+                return Center(
+                  child: Text('Um erro desconhecido ocorreu'),
+                );
+              }),
+        ));
   }
 
-  // SingleChildScrollView buildContent(Ecordel cordel) {
-  //   return SingleChildScrollView(
-  //     child: Container(
-  //       padding: EdgeInsets.all(15),
-  //       child: Column(
-  //         children: <Widget>[
-  //           Container(
-  //             height: 260,
-  //             width: 200,
-  //             child: getXilogravuraImageOrDefault(
-  //                 cordel.xilogravura?.url, BoxFit.contain),
-  //           ),
-  //           Observer(builder: (_) {
-  //             return Text(
-  //               cordel.content!,
-  //               style: TextStyle(fontSize: 20 * controller.fontScaleFactor),
-  //             );
-  //           }),
-  //           Text("Autor: ${cordel.author.name}")
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+  SingleChildScrollView buildContent(Ecordel cordel) {
+    return SingleChildScrollView(
+      child: Container(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: <Widget>[
+            Text(
+            cordel.title,
+            style: TextStyle(fontSize: 20),
+          ),
+          Text("Autor: ${cordel.author.name}"),
+          Padding(
+              padding: EdgeInsets.only(top: 15),
+              child: getXilogravuraImageOrDefault( cordel.xilogravuraUrl, BoxFit.contain)
+      ),
+      Padding(
+        padding: EdgeInsets.only(top: 25),
+        child: Text(
+          cordel.content ?? "",
+          style: TextStyle(fontSize: 14),
+        ),
+      ),
+      ],
+    ),)
+    ,
+    );
+  }
 
-  // Center buildProgressIndicator() {
-  //   return Center(
-  //     child: CircularProgressIndicator(),
-  //   );
-  // }
+  Center buildProgressIndicator() {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
 }

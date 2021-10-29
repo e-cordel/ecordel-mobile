@@ -15,7 +15,10 @@ class EcordelCard extends StatelessWidget {
       child: GridTile(
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed(ReadScreen.routeName, arguments: 1);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ReadScreen(cordelId: cordel.id,)),
+            );
           },
           child: Image.network(
             cordel.xilogravuraUrl,
