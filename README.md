@@ -20,6 +20,10 @@ Você pode usar compile time variables para sobrescrever as configurações defi
 
     flutter run --dart-define=API_URL=http://192.168.1.2:8080/api/v1
 
+### Antes do push
+
+    flutter format .
+
 ## Como contribuir
 
 Para ajuda e informações de como contribuir com o projeto, acesse a [página oficial do e-codel](http://www.ecordel.com.br/como-contribuir).

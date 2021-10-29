@@ -6,7 +6,6 @@ import '../configs/env_config.dart';
 import '../models/ecordel.dart';
 
 class EcordelRepositoryAPI implements EcordelRepository {
-
   final Dio dio = Dio();
   final String cordelsUrl = EnvironmentConfig.API_URL + '/cordels';
 

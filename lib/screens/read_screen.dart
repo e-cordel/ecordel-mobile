@@ -57,14 +57,14 @@ class _ReadScreenState extends State<ReadScreen> {
   }
 
   SingleChildScrollView buildContent() {
-
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(defaultPadding),
         child: Column(
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.only(top: defaultPadding, bottom: defaultPadding),
+                padding: EdgeInsets.only(
+                    top: defaultPadding, bottom: defaultPadding),
                 child: getXilogravuraImageOrDefault(
                     widget.summary.xilogravuraUrl, BoxFit.contain)),
             Text(

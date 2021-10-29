@@ -47,6 +47,5 @@ class Cordel {
 
   String toJson() => json.encode(toMap());
 
-  factory Cordel.fromJson(String source) =>
-      Cordel.fromMap(json.decode(source));
+  factory Cordel.fromJson(String source) => Cordel.fromMap(json.decode(source));
 }

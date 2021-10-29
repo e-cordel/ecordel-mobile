@@ -3,7 +3,6 @@ import 'package:ecordel/screens/read_screen.dart';
 import 'package:flutter/material.dart';
 
 class EcordelCard extends StatelessWidget {
-
   final CordelSummary cordel;
 
   EcordelCard({required this.cordel});
@@ -17,7 +16,10 @@ class EcordelCard extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ReadScreen(summary: cordel,)),
+              MaterialPageRoute(
+                  builder: (context) => ReadScreen(
+                        summary: cordel,
+                      )),
             );
           },
           child: Image.network(
