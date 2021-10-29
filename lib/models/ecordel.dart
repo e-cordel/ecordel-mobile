@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import './author.dart';
 
-class Ecordel {
+class Cordel {
   int id;
   Author author;
   String title;
@@ -11,7 +11,7 @@ class Ecordel {
   String? xilogravuraUrl;
   List<String>? tags;
 
-  Ecordel({
+  Cordel({
     required this.id,
     required this.author,
     required this.title,
@@ -33,8 +33,8 @@ class Ecordel {
     };
   }
 
-  factory Ecordel.fromMap(Map<String, dynamic> map) {
-    return Ecordel(
+  factory Cordel.fromMap(Map<String, dynamic> map) {
+    return Cordel(
       id: map['id'],
       author: Author.fromMap(map['author']),
       title: map['title'],
@@ -47,6 +47,6 @@ class Ecordel {
 
   String toJson() => json.encode(toMap());
 
-  factory Ecordel.fromJson(String source) =>
-      Ecordel.fromMap(json.decode(source));
+  factory Cordel.fromJson(String source) =>
+      Cordel.fromMap(json.decode(source));
 }

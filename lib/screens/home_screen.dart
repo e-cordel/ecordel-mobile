@@ -5,10 +5,9 @@ import 'package:ecordel/widgets/ecordel_card.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeScreen extends StatelessWidget {
+final api = EcordelRepositoryAPI();
 
-  final String routeName = '/home-screen';
-  final api = EcordelRepositoryAPI();
+class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

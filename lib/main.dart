@@ -13,11 +13,6 @@ class EcordelApp extends StatelessWidget {
       theme:
           ThemeData(primarySwatch: Colors.orange, primaryColor: Colors.lightBlue),
       home: HomeScreen(),
-      // routes: {
-      //   ReadScreen.routeName: (ctx) => ReadScreen(
-      //         cordelId: 1,
-      //       ),
-      // },
     );
   }
 }

@@ -27,7 +27,7 @@ class EcordelRepositoryAPI implements EcordelRepository {
   }
 
   @override
-  Future<Ecordel> getById(int id) async {
+  Future<Cordel> getById(int id) async {
     final String url = '$cordelsUrl/$id';
     var response;
 
@@ -37,7 +37,7 @@ class EcordelRepositoryAPI implements EcordelRepository {
       rethrow;
     }
 
-    Ecordel cordel = Ecordel.fromMap(response.data);
+    Cordel cordel = Cordel.fromMap(response.data);
     return cordel;
   }
 
@@ -64,7 +64,7 @@ abstract class EcordelRepository {
     throw UnimplementedError();
   }
 
-  Future<Ecordel> getById(int id) async {
+  Future<Cordel> getById(int id) async {
     throw UnimplementedError();
   }
 

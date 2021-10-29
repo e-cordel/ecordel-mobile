@@ -1,5 +1,5 @@
 name: ecordel
-description: A new Flutter project.
+description: Leitor de cordéis digitais.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -13,12 +13,12 @@ description: A new Flutter project.
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
 
-## Slidy Scripts 
-vars: 
+## Slidy Scripts
+vars:
     clean: flutter clean
     get: flutter pub get
     runner: flutter pub run build_runner
-scripts: 
+scripts:
     mobx_build: $runner build
     mobx_watch: $clean & $get & $runner watch
     mobx_build_clean: $clean & $get & $runner build --delete-conflicting-outputs

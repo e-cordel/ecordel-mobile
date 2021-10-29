@@ -1,102 +1,118 @@
+import 'package:ecordel/models/cordel_summary.dart';
 import 'package:ecordel/repositores/ecordel_repository.dart';
 import 'package:ecordel/utils/images.dart';
 
 import '../models/ecordel.dart';
 import 'package:flutter/material.dart';
 
+final api = EcordelRepositoryAPI();
+
+final defaultPadding = 15.0;
+final headerSize = 20.0;
+
 class ReadScreen extends StatefulWidget {
-  static const String routeName = '/read-screen';
+  final CordelSummary summary;
 
-  final String title;
-  final int cordelId;
-
-  ReadScreen({Key? key, this.title = "", required this.cordelId})
-      : super(key: key);
+  ReadScreen({Key? key, required this.summary}) : super(key: key);
 
   @override
   _ReadScreenState createState() => _ReadScreenState();
 }
 
 class _ReadScreenState extends State<ReadScreen> {
-  final api = EcordelRepositoryAPI();
+  var textSize = 18.0;
+  Cordel? cordel;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      if (index == 0) {
+        textSize++;
+      } else {
+        textSize--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          actions: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(
-                  "Tamanho do texto: ",
-                  style: TextStyle(fontSize: 20),
-                ),
-                IconButton(
-                  iconSize: 20,
-                  icon: Icon(Icons.add),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  iconSize: 20,
-                  icon: Icon(Icons.remove),
-                  onPressed: () {},
-                )
-              ],
-            ),
-          ],
-          centerTitle: true,
+      appBar: AppBar(
+        title: Text(
+          widget.summary.title,
+          style: TextStyle(fontSize: headerSize),
         ),
-        body: Center(
-          child: FutureBuilder(
-              future: api.getById(widget.cordelId),
-              builder: (_, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Um erro ocorreu ao abrir este cordel'),
-                  );
-                } else if (snapshot.hasData) {
-                  return buildContent(snapshot.data as Ecordel);
-                }
-                return Center(
-                  child: Text('Um erro desconhecido ocorreu'),
-                );
-              }),
-        ));
+        centerTitle: true,
+      ),
+      body: Center(child: buildContent()),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add), label: "Aumentar texto"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.remove), label: "Diminuir texto"),
+        ],
+        onTap: _onItemTapped,
+      ),
+    );
   }
 
-  SingleChildScrollView buildContent(Ecordel cordel) {
+  SingleChildScrollView buildContent() {
+
     return SingleChildScrollView(
       child: Container(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            children: <Widget>[
+        padding: EdgeInsets.all(defaultPadding),
+        child: Column(
+          children: <Widget>[
+            Padding(
+                padding: EdgeInsets.only(top: defaultPadding, bottom: defaultPadding),
+                child: getXilogravuraImageOrDefault(
+                    widget.summary.xilogravuraUrl, BoxFit.contain)),
             Text(
-            cordel.title,
-            style: TextStyle(fontSize: 20),
-          ),
-          Text("Autor: ${cordel.author.name}"),
-          Padding(
-              padding: EdgeInsets.only(top: 15),
-              child: getXilogravuraImageOrDefault( cordel.xilogravuraUrl, BoxFit.contain)
-      ),
-      Padding(
-        padding: EdgeInsets.only(top: 25),
-        child: Text(
-          cordel.content ?? "",
-          style: TextStyle(fontSize: 14),
+              "Autor: ${widget.summary.authorName}",
+              style: TextStyle(fontSize: headerSize),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 25),
+              child: FutureBuilder(
+                  future: getCordel(),
+                  builder: (_, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Um erro ocorreu ao abrir este cordel'),
+                      );
+                    } else if (snapshot.hasData) {
+                      return buildTextContent(snapshot.data as Cordel);
+                    }
+                    return Center(
+                      child: Text('Um erro desconhecido ocorreu'),
+                    );
+                  }),
+            ),
+          ],
         ),
       ),
-      ],
-    ),)
-    ,
     );
   }
 
   Center buildProgressIndicator() {
     return Center(
       child: CircularProgressIndicator(),
+    );
+  }
+
+  Future<Cordel> getCordel() async {
+    if (cordel == null) {
+      return api.getById(widget.summary.id).then((value) => cordel = value);
+    }
+    return Future.value(cordel);
+  }
+
+  Text buildTextContent(Cordel cordel) {
+    return Text(
+      cordel.content ?? "",
+      style: TextStyle(fontSize: textSize),
     );
   }
 }
