@@ -1,54 +1,51 @@
 import 'dart:convert';
 
 import './author.dart';
-import 'xilogravura.dart';
 
-class Ecordel {
+class Cordel {
   int id;
   Author author;
   String title;
-  String description;
-  String content;
-  Xilogravura xilogravura;
-  List<String> tags;
-  Ecordel({
-    this.id,
-    this.author,
-    this.title,
+  String? description;
+  String? content;
+  String? xilogravuraUrl;
+  List<String>? tags;
+
+  Cordel({
+    required this.id,
+    required this.author,
+    required this.title,
     this.description,
     this.content,
-    this.xilogravura,
+    this.xilogravuraUrl,
     this.tags,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'author': author?.toMap(),
+      'author': author.toMap(),
       'title': title,
       'description': description,
       'content': content,
-      'xilogravura': xilogravura?.toMap(),
+      'xilogravuraUrl': xilogravuraUrl,
       'tags': tags,
     };
   }
 
-  factory Ecordel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return Ecordel(
+  factory Cordel.fromMap(Map<String, dynamic> map) {
+    return Cordel(
       id: map['id'],
       author: Author.fromMap(map['author']),
       title: map['title'],
       description: map['description'],
       content: map['content'],
-      xilogravura: Xilogravura.fromMap(map['xilogravura']),
+      xilogravuraUrl: map['xilogravuraUrl'],
       tags: List<String>.from(map['tags']),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Ecordel.fromJson(String source) =>
-      Ecordel.fromMap(json.decode(source));
+  factory Cordel.fromJson(String source) => Cordel.fromMap(json.decode(source));
 }
