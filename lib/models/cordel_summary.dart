@@ -3,7 +3,7 @@ import 'dart:convert';
 class CordelSummary {
   final int id;
   final String title;
-  final String xilogravuraUrl;
+  final String? xilogravuraUrl;
   final String authorName;
 
   CordelSummary(

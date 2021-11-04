@@ -1,3 +1,5 @@
+import 'package:ecordel/utils/images.dart';
+
 import '../models/cordel_summary.dart';
 import 'package:ecordel/screens/read_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +24,8 @@ class EcordelCard extends StatelessWidget {
                       )),
             );
           },
-          child: Image.network(
-            cordel.xilogravuraUrl,
-            fit: BoxFit.cover,
-          ),
+          child:
+              getXilogravuraImageOrDefault(cordel.xilogravuraUrl, BoxFit.cover),
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black54,
