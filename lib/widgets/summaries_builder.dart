@@ -1,43 +1,34 @@
+import 'dart:developer';
+
 import 'package:ecordel/models/cordel_summary.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'ecordel_card.dart';
 
 class SummariesBuilder extends StatelessWidget {
-  final Future<List<CordelSummary>> summaries;
 
-  SummariesBuilder({Key? key, required this.summaries}) : super(key: key);
+  final List<CordelSummary> summaries;
+  final ScrollController _controller = ScrollController();
+  VoidCallback? listener;
+
+  SummariesBuilder({Key? key, required this.summaries, this.listener}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<CordelSummary>>(
-      future: summaries,
-      builder: (
-        context,
-        snapshot,
-      ) {
-        if (snapshot.hasData) {
-          if (snapshot.data!.isEmpty) {
-            return Center(
-              child: Text("Nenhum cordel foi encontrado :'("),
-            );
-          }
-          return buildGridView(snapshot.data!);
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text("Houve um erro ao obter os cordeis"),
-          );
-        }
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+
+    _controller.addListener((){
+      if (_controller.position.maxScrollExtent == _controller.offset) {
+        log('fim da lista');
+        listener?.call();
+      }
+    });
+
+    return buildGridView(summaries);
   }
 
   Widget buildGridView(List<CordelSummary> cordels) {
     return GridView.builder(
+      controller: _controller,
       padding: EdgeInsets.all(10),
       itemCount: cordels.length,
       itemBuilder: (ctx, index) => EcordelCard(cordel: cordels[index]),

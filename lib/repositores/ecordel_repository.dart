@@ -1,73 +1,59 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:ecordel/repositores/page_response.dart';
 import '../models/cordel_summary.dart';
 import '../configs/env_config.dart';
 import '../models/ecordel.dart';
 
-class EcordelRepositoryAPI implements EcordelRepository {
+final String cordelsUrl = EnvironmentConfig.API_URL + '/cordels';
+
+class EcordelRepositoryAPI {
+
   final Dio dio = Dio();
-  final String cordelsUrl = EnvironmentConfig.API_URL + '/cordels';
+
   final String content = 'content';
+  final String last = 'last';
+  final String number = 'number';
+  final String size = 'size';
 
   Map<String, String>? request;
 
-  Future<List<CordelSummary>> getSummaries() async {
+  Future<PageResponse<CordelSummary>> getSummaries([page=0]) async {
     try {
-      final response = await dio.get("$cordelsUrl/summaries");
-
-      var cordelsSummary = (response.data[content] as List).map((e) {
-        return CordelSummary.fromMap(e);
-      }).toList();
-
-      return cordelsSummary;
+      final response = await dio.get("$cordelsUrl/summaries?page=$page");
+      return buildPageResponse(response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  @override
   Future<Cordel> getById(int id) async {
     final String url = '$cordelsUrl/$id';
-    var response;
-
     try {
-      response = await dio.get(url);
+      final response = await dio.get(url);
+      return Cordel.fromMap(response.data);
     } catch (e) {
       rethrow;
     }
-
-    Cordel cordel = Cordel.fromMap(response.data);
-    return cordel;
   }
 
-  Future<List<CordelSummary>> searchByTitle(String title) async {
+  Future<PageResponse<CordelSummary>> searchByTitle(String title, [page=0]) async {
     final String url = '$cordelsUrl/summaries?title=$title';
     log('search url: $url');
     try {
       final response = await dio.get(url);
-
-      var cordelsSummary = (response.data[content] as List).map((e) {
-        return CordelSummary.fromMap(e);
-      }).toList();
-
-      return cordelsSummary;
+      return buildPageResponse(response.data);
     } catch (e) {
       rethrow;
     }
   }
-}
 
-abstract class EcordelRepository {
-  Future<List<CordelSummary>> getSummaries() async {
-    throw UnimplementedError();
+  PageResponse<CordelSummary> buildPageResponse(Map<String, dynamic> data) {
+    var summaries = (data[content] as List).map((e) {
+      return CordelSummary.fromMap(e);
+    }).toList();
+    return PageResponse(summaries, data[last] as bool, data[number] as int, data[size] as int);
   }
 
-  Future<Cordel> getById(int id) async {
-    throw UnimplementedError();
-  }
-
-  Future<List<CordelSummary>> searchByTitle(String title) async {
-    throw UnimplementedError();
-  }
 }
