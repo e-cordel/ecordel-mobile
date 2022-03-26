@@ -3,10 +3,10 @@ on:
   push:
     branches:
       - develop
-      - master
   pull_request:
   workflow_dispatch:
-  
+env:
+  API_URL_DEV: ${{secrets.API_URL_DEV}}
 jobs:
   build:
     name: Flutter Build
@@ -34,7 +34,7 @@ jobs:
       - run: flutter test
 
       # Build apk.
-      - run: flutter build apk
+      - run: flutter build apk --dart-define=API_URL="$API_URL_DEV"
 
       # Upload generated apk to the artifacts.
       - uses: actions/upload-artifact@v1
