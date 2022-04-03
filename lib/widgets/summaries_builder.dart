@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:ecordel/models/cordel_summary.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'ecordel_card.dart';
@@ -25,6 +26,7 @@ class SummariesBuilder extends StatelessWidget {
           }
           return buildGridView(snapshot.data!);
         } else if (snapshot.hasError) {
+          log(snapshot.error.toString());
           return Center(
             child: Text("Houve um erro ao obter os cordeis"),
           );

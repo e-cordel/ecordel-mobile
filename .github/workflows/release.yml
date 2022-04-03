@@ -41,7 +41,7 @@ jobs:
       - run: flutter test
 
       # Build apk.
-      - run: flutter build apk --dart-define API_URL="$API_URL"
+      - run: flutter build apk --dart-define=API_URL="$API_URL"
 
       - uses: ncipollo/release-action@v1
         with:
