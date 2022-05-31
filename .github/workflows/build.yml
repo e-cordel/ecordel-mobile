@@ -7,6 +7,8 @@ on:
   workflow_dispatch:
 env:
   API_URL_DEV: ${{secrets.API_URL_DEV}}
+  KEYSTORE: ${{secrets.KEYSTORE}}
+  KEYSTORE_PASS: ${{secrets.KEYSTORE_PASS}}
 jobs:
   build:
     name: Flutter Build
@@ -32,7 +34,10 @@ jobs:
 
       # Run widget tests for our flutter project.
       - run: flutter test
-
+      
+      # Get keystore from secrets
+      - run: echo "$KEYSTORE" | base64 --decode > android/app/upload-keystore.jks
+      
       # Build apk.
       - run: flutter build apk --dart-define=API_URL="$API_URL_DEV"
 
