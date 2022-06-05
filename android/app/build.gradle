@@ -30,8 +30,9 @@ def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
-keystoreProperties["storePassword"] = System.getenv("KEYSTORE_PASS")
-keystoreProperties["keyPassword"] = System.getenv("KEYSTORE_PASS")
+
+keystoreProperties["storePassword"] = System.getenv("KEYSTORE_PASS") ?: ""
+keystoreProperties["keyPassword"] = System.getenv("KEYSTORE_PASS") ?: ""
 
 android {
     compileSdkVersion 31
