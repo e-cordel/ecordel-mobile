@@ -42,13 +42,14 @@ jobs:
       # Run widget tests for our flutter project.
       - run: flutter test
       
-      # Get keystore from secrets
-      - run: echo "$KEYSTORE" | base64 --decode > android/app/upload-keystore.jks
+      - name: Configure keystore
+        run: echo "$KEYSTORE" | base64 --decode > android/app/upload-keystore.jks
       
-      # Build apk.
-      - run: flutter build appbundle --dart-define=API_URL="$API_URL"
+      - name: Build app blundle
+        run: flutter build appbundle --dart-define=API_URL="$API_URL"
 
-      - uses: ncipollo/release-action@v1
+      - name: Create release
+        uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/bundle/release/app-release.aab"
           commit: master
