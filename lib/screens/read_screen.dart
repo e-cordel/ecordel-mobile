@@ -76,14 +76,16 @@ class _ReadScreenState extends State<ReadScreen> {
               child: FutureBuilder(
                   future: getCordel(),
                   builder: (_, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting && this.cordel == null) {
+                    if (snapshot.connectionState == ConnectionState.waiting &&
+                        this.cordel == null) {
                       return Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
                       return Center(
                         child: Text('Um erro ocorreu ao abrir este cordel'),
                       );
                     } else if (snapshot.hasData || this.cordel != null) {
-                      return buildTextContent(this.cordel ?? snapshot.data as Cordel);
+                      return buildTextContent(
+                          this.cordel ?? snapshot.data as Cordel);
                     }
                     return Center(
                       child: Text('Um erro desconhecido ocorreu'),

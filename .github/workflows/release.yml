@@ -8,6 +8,8 @@ on:
   workflow_dispatch:
 env:
   API_URL: ${{secrets.API_URL}}
+  KEYSTORE: ${{secrets.KEYSTORE}}
+  KEYSTORE_PASS: ${{secrets.KEYSTORE_PASS}}
 jobs:
   build:
     name: Flutter Build
@@ -39,13 +41,17 @@ jobs:
 
       # Run widget tests for our flutter project.
       - run: flutter test
+      
+      - name: Configure keystore
+        run: echo "$KEYSTORE" | base64 --decode > android/app/upload-keystore.jks
+      
+      - name: Build app blundle
+        run: flutter build appbundle --dart-define=API_URL="$API_URL"
 
-      # Build apk.
-      - run: flutter build apk --dart-define=API_URL="$API_URL"
-
-      - uses: ncipollo/release-action@v1
+      - name: Create release
+        uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/release/app-release.apk"
+          artifacts: "build/app/outputs/bundle/release/app-release.aab"
           commit: master
           tag: ${{ steps.appVersion.outputs.result }}
           token: ${{ secrets.GITHUB_TOKEN }}

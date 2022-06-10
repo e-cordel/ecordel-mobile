@@ -22,6 +22,10 @@ Você pode usar compile time variables para sobrescrever as configurações defi
 
     flutter run --dart-define=API_URL=http://192.168.1.2:8080/api/v1
 
+### Build apk em modo debug
+
+    flutter build apk --debug
+
 ## Como contribuir
 
 Para ajuda e informações de como contribuir com o projeto, acesse a [página oficial do e-codel](http://www.ecordel.com.br/como-contribuir).
@@ -32,3 +36,6 @@ Para ajuda e informações de como contribuir com o projeto, acesse a [página o
     flutter format .
     flutter analyze
 ```
+## Docs
+
+[Documentação](./docs/).
