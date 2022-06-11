@@ -1,30 +1,28 @@
-import 'app/commons/providers/cordel_provider.dart';
-import 'app/screens/home/home_page.dart';
-import 'app/screens/read/read_page.dart';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import './screens/home_screen.dart';
 
-void main() => runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => EcordelProvider(),
-        ),
-      ],
-      child: MyApp(),
-    ));
+void main() {
+  //quit immediately any time an error is caught by Flutter in release mode
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    if (kReleaseMode) exit(1);
+  };
+  runApp(EcordelApp());
+}
 
-class MyApp extends StatelessWidget {
+class EcordelApp extends StatelessWidget {
+  const EcordelApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: HomeScreen.route,
-      routes: {
-        HomeScreen.route: (context) => HomeScreen(),
-        ReadScreen.route: (context) => ReadScreen(),
-      },
-      debugShowCheckedModeBanner: false,
-      title: 'E-Cordel',
+      title: 'e-cordel',
+      theme: ThemeData(
+          primarySwatch: Colors.orange, primaryColor: Colors.lightBlue),
+      home: HomeScreen(),
     );
   }
 }

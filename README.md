@@ -1,29 +1,41 @@
-# ecordel-mobile
-Aplicativo Mobile para o projeto E-Cordel
-=======
-# ecordel mobile
+[![Build](https://github.com/e-cordel/ecordel-mobile/actions/workflows/build.yml/badge.svg)](https://github.com/e-cordel/ecordel-mobile/actions/workflows/build.yml)
 
-Este projeto foi criado para prover uma versão mobile do projeto e-cordel, permitindo que o usuário consiga acessar e ler os cordeis de qualquer lugar.
+# e-cordel app
+
+App para leitura de cordéis digitais.
 
 ## Iniciando o projeto no seu ambiente de desenvolvimento
-Este projeto é feito em flutter. 
-Para configurar o seu ambiente e conseguir rodar o projeto localmente, basta seguir os 5 passos descritos na seção 'Get started' da documentação oficial, [disponível aqui](https://flutter.dev/docs/get-started/install)
 
-Depois disso, faça o clone do projeto para o seu computador e execute a partir do da sua IDE favorita.
+    Esse readme assume que você possui todas as configurações necessárias para executar um projeto flutter.
 
+Para configurar o seu ambiente e conseguir rodar o projeto localmente, siga a [documentação oficial](https://flutter.dev/docs/get-started/install).
 
-## Organização inicial do projeto
+### Iniciando o projeto 
 
-A organização dos diretórios segue, mas não se limita, a seguinte lógica: 
- - app -> contém todo o APP.
- - commons -> tudo o que for disponível globalmente na aplicação.
- - screens -> cada tela criada será um novo subiretório de screens. componentes referentes a cada tela deve ficar dentro do seu respectivo diretório. Ex.: ecordel_card_widget.dart é utilizado apenas na home e na área de busca. Então esta deve residir dentro do diretório 'home'.
- 
- ## Acesso a API
-O acesso a API para realizar testes é feita através do commons -> providers -> cordel_provider.dart. A URL da API está disponível em commons -> api_configs.dart
+Com um device conectado, execute o comando abaixo:
 
+    flutter run
 
-## Melhorias
-Esta é uma estrutura inicial do projeto que requer muitas modificações. Sinta-se  a vontade em nos ajudar.
+### Sobrescrevendo configurações
 
+Você pode usar compile time variables para sobrescrever as configurações definidas no arquivo [env_config.dart](lib/configs/env_config.dart).
 
+    flutter run --dart-define=API_URL=http://192.168.1.2:8080/api/v1
+
+### Build apk em modo debug
+
+    flutter build apk --debug
+
+## Como contribuir
+
+Para ajuda e informações de como contribuir com o projeto, acesse a [página oficial do e-codel](http://www.ecordel.com.br/como-contribuir).
+
+### Antes do push
+
+```shell
+    flutter format .
+    flutter analyze
+```
+## Docs
+
+[Documentação](./docs/).
