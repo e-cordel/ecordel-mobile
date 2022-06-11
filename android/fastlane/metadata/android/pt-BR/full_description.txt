@@ -1,0 +1,2 @@
+O e-cordel app é um leitor de cordéis digitais. Nesse app você encontrará obras que foram "digitalizadas" preservando a essência do cordel.
+O e-cordel é um projeto de código aberto e gratuito que visa difundir a literatura de cordél através da internet.
