@@ -1,9 +1,8 @@
-name: Build
+name: Build Pull Request
 on:
-  push:
-    branches:
-      - develop
   pull_request:
+    branches:
+      - master
   workflow_dispatch:
 env:
   API_URL_DEV: ${{secrets.API_URL_DEV}}
