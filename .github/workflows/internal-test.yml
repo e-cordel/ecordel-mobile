@@ -1,10 +1,5 @@
-name: Release
+name: Internal test
 on:
-  push:
-    branches: [master]
-    paths-ignore:
-      - '**/README.md'
-      - 'docs/**'
   workflow_dispatch:
 env:
   API_URL: ${{secrets.API_URL}}
@@ -24,12 +19,6 @@ jobs:
           channel: 'stable'
           flutter-version: '2.2.3'
 
-      - name: Get version from pubspec.yaml
-        id: appVersion
-        uses: devorbitus/yq-action-output@v1.1
-        with:
-          cmd: yq eval '.version' 'pubspec.yaml'
-
       # Get flutter dependencies.
       - run: flutter pub get
 
@@ -44,7 +33,7 @@ jobs:
       
       - name: Configure keystore
         run: echo "$KEYSTORE" | base64 --decode > android/app/upload-keystore.jks
-
+      
       - name: Build app blundle
         run: flutter build appbundle --dart-define=API_URL="$API_URL"
 
@@ -56,15 +45,7 @@ jobs:
           working-directory: android
 
       - name: Push beta release to Google Playstore
-        run: bundle exec fastlane beta
+        run: bundle exec fastlane internal
         env:
           PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
         working-directory: android
-
-      - name: Create release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/bundle/release/app-release.aab"
-          commit: master
-          tag: ${{ steps.appVersion.outputs.result }}
-          token: ${{ secrets.GITHUB_TOKEN }}
