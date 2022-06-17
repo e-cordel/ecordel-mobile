@@ -48,7 +48,7 @@ jobs:
           working-directory: android
 
       - name: Push beta release to Google Playstore
-      - run: bundle exec fastlane internal
+        run: bundle exec fastlane internal
         env:
           PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
         working-directory: android
