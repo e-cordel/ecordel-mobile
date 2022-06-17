@@ -1,11 +1,8 @@
-name: Build Pull Request
+name: Internal test
 on:
-  pull_request:
-    branches:
-      - master
   workflow_dispatch:
 env:
-  API_URL_DEV: ${{secrets.API_URL_DEV}}
+  API_URL: ${{secrets.API_URL}}
   KEYSTORE: ${{secrets.KEYSTORE}}
   KEYSTORE_PASS: ${{secrets.KEYSTORE_PASS}}
 jobs:
@@ -37,11 +34,18 @@ jobs:
       - name: Configure keystore
         run: echo "$KEYSTORE" | base64 --decode > android/app/upload-keystore.jks
       
-      - name: Build APK
-        run: flutter build apk --dart-define=API_URL="$API_URL_DEV"
+      - name: Build app blundle
+        run: flutter build appbundle --dart-define=API_URL="$API_URL"
 
-      - name: Upload apk to the artifacts
-        uses: actions/upload-artifact@v1
+      - name: Setup Fastlane
+        uses: ruby/setup-ruby@v1
         with:
-          name: release-apk
-          path: build/app/outputs/apk/release/app-release.apk
+          ruby-version: "2.7"
+          bundler-cache: true
+          working-directory: android
+
+      - name: Push beta release to Google Playstore
+        run: bundle exec fastlane internal
+        env:
+          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
+        working-directory: android
