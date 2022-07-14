@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefixIcon: Icon(Icons.search),
                   suffixIcon: IconButton(
                     icon: Icon(Icons.clear),
-                    onPressed: _controller.clear,
+                    onPressed: () => _clearSearch(),
                   )),
               onSubmitted: (text) => _searchByTitle(text),
             ),
@@ -64,6 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
   _searchByTitle(String text) {
     setState(() {
       summaries = api.searchByTitle(text);
+    });
+  }
+
+  _clearSearch() {
+    _controller.clear();
+    setState(() {
+      summaries = api.getSummaries();
     });
   }
 }
