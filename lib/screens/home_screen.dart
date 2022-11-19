@@ -1,11 +1,9 @@
-import 'package:ecordel/repositores/ecordel_repository.dart';
+import 'package:ecordel/main.dart';
 import 'package:ecordel/widgets/summaries_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/cordel_summary.dart';
-
-final api = EcordelRepositoryAPI();
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,9 +15,9 @@ class _HomeScreenState extends State<HomeScreen> {
   var _controller = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    summaries = api.getSummaries();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    summaries = EcordelApp.of(context).api.getSummaries();
   }
 
   @override
@@ -63,14 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _searchByTitle(String text) {
     setState(() {
-      summaries = api.searchByTitle(text);
+      summaries = EcordelApp.of(context).api.searchByTitle(text);
     });
   }
 
   _clearSearch() {
     _controller.clear();
     setState(() {
-      summaries = api.getSummaries();
+      summaries = EcordelApp.of(context).api.getSummaries();
     });
   }
 }

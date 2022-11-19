@@ -12,6 +12,14 @@ Para configurar o seu ambiente e conseguir rodar o projeto localmente, siga a [d
 
 ### Iniciando o projeto 
 
+Listando emulators
+
+    flutter emulators
+
+Iniciando emulador
+
+    flutter emulators --launch <emulator-name>
+
 Com um device conectado, execute o comando abaixo:
 
     flutter run
@@ -20,7 +28,7 @@ Com um device conectado, execute o comando abaixo:
 
 Você pode usar compile time variables para sobrescrever as configurações definidas no arquivo [env_config.dart](lib/configs/env_config.dart).
 
-    flutter run --dart-define=API_URL=http://192.168.1.2:8080/api/v1
+    flutter run --dart-define=API_URL=http://192.168.1.2:5000/api/v1
 
 ### Build apk em modo debug
 
