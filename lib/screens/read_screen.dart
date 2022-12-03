@@ -1,11 +1,9 @@
+import 'package:ecordel/main.dart';
 import 'package:ecordel/models/cordel_summary.dart';
-import 'package:ecordel/repositores/ecordel_repository.dart';
 import 'package:ecordel/utils/images.dart';
 
 import '../models/ecordel.dart';
 import 'package:flutter/material.dart';
-
-final api = EcordelRepositoryAPI();
 
 final defaultPadding = 15.0;
 final headerSize = 20.0;
@@ -106,7 +104,10 @@ class _ReadScreenState extends State<ReadScreen> {
 
   Future<Cordel> getCordel() async {
     if (cordel == null) {
-      return api.getById(widget.summary.id).then((value) => cordel = value);
+      return EcordelApp.of(context)
+          .api
+          .getById(widget.summary.id)
+          .then((value) => cordel = value);
     }
     return Future.value(cordel);
   }
