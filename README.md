@@ -10,7 +10,7 @@ App para leitura de cordéis digitais.
 
 Para configurar o seu ambiente e conseguir rodar o projeto localmente, siga a [documentação oficial](https://flutter.dev/docs/get-started/install).
 
-### Iniciando o projeto 
+### Iniciando o projeto novo
 
 Listando emulators
 
