@@ -1,6 +1,6 @@
 [![Build](https://github.com/e-cordel/ecordel-mobile/actions/workflows/build.yml/badge.svg)](https://github.com/e-cordel/ecordel-mobile/actions/workflows/build.yml)
 
-# e-cordel app
+# E-cordel app
 
 App para leitura de cordéis digitais.
 
@@ -34,10 +34,6 @@ Você pode usar compile time variables para sobrescrever as configurações defi
 
     flutter build apk --debug
 
-## Como contribuir
-
-Para ajuda e informações de como contribuir com o projeto, acesse a [página oficial do e-codel](http://www.ecordel.com.br/como-contribuir).
-
 ### Antes do push
 
 ```shell
@@ -47,3 +43,18 @@ Para ajuda e informações de como contribuir com o projeto, acesse a [página o
 ## Docs
 
 [Documentação](./docs/).
+
+## Como contribuir
+
+Para ajuda e informações de como contribuir com o projeto, acesse a [página oficial do e-codel](http://www.ecordel.com.br/como-contribuir).
+
+## Canais de Comunicação
+
+Nos encontre nas seguintes plataformas abaixo:
+
+<a href="https://ecordel.com.br/"><img align="center" alt="C++" height="27" width="90" src="https://img.shields.io/badge/website-000000?style=for-the-badge&logo=About.me&logoColor=white
+Site: https://ecordel.com.br/"></a>
+
+<a href="https://www.linkedin.com/company/e-cordel/"> <img align="center" alt="C++" height="27" width="90" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"> </a>
+
+<a href="https://www.instagram.com/projetoecordel/"><img align="center" alt="C++" height="27" width="90" src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"></a>
