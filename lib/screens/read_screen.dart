@@ -40,6 +40,7 @@ class _ReadScreenState extends State<ReadScreen> {
           style: TextStyle(fontSize: headerSize),
         ),
         centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Center(child: buildContent()),
       bottomNavigationBar: BottomNavigationBar(

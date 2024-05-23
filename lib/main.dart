@@ -14,7 +14,11 @@ void main() {
   runApp(EcordelApp(
       child: MaterialApp(
         title: 'e-cordel',
-        theme: ThemeData(primarySwatch: Colors.green),
+        theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: Color.fromRGBO(107, 210, 111, 1)),
+            brightness: Brightness.light),
         home: HomeScreen(),
       ),
       api: EcordelRepositoryAPI()));
@@ -32,7 +36,7 @@ class EcordelApp extends InheritedWidget {
   static EcordelApp of(BuildContext context) {
     final EcordelApp? result =
         context.dependOnInheritedWidgetOfExactType<EcordelApp>();
-    assert(result != null, 'No FrogColor found in context');
+    assert(result != null, 'No EcordelApp found in context');
     return result!;
   }
 
