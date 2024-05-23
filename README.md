@@ -41,8 +41,8 @@ Para ajuda e informações de como contribuir com o projeto, acesse a [página o
 ### Antes do push
 
 ```shell
-    flutter format .
-    flutter analyze
+    dart format .
+    flutter analyze .
 ```
 ## Docs
 
