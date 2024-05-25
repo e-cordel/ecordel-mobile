@@ -15,13 +15,13 @@ jobs:
 
       - uses: actions/setup-java@v1
         with:
-          java-version: '12.x'
+          java-version: '17.x'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.19.0
+          flutter-version: 3.22.1
 
       # Get flutter dependencies.
       - run: flutter pub get
