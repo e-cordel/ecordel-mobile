@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: SummariesBuilder(summaries: summaries),
       drawer: Drawer(
@@ -49,10 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             DrawerHeader(child: Image.asset('assets/images/ecordel.png')),
             ListTile(
-              leading: Icon(Icons.web),
-              title: Text('Sobre'),
-              onTap: () => launch('https://www.ecordel.com.br'),
-            )
+                leading: Icon(Icons.web),
+                title: Text('Sobre'),
+                onTap: () => launchUrl(Uri.https('www.ecordel.com.br')))
           ],
         ),
       ),

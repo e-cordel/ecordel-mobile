@@ -37,8 +37,8 @@ Você pode usar compile time variables para sobrescrever as configurações defi
 ### Antes do push
 
 ```shell
-    flutter format .
-    flutter analyze
+    dart format .
+    flutter analyze .
 ```
 ## Docs
 
