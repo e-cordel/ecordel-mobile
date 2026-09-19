@@ -2,58 +2,63 @@
 
 # E-cordel app
 
-App para leitura de cordéis digitais.
+Mobile app for reading digital cordels.
 
-## Iniciando o projeto no seu ambiente de desenvolvimento
+## Getting started
 
-    Esse readme assume que você possui todas as configurações necessárias para executar um projeto flutter.
+This README assumes that you already have the required Flutter development environment configured on your machine.
 
-Para configurar o seu ambiente e conseguir rodar o projeto localmente, siga a [documentação oficial](https://flutter.dev/docs/get-started/install).
+To set up your environment and run the project locally, follow the official Flutter installation guide: https://flutter.dev/docs/get-started/install
 
-### Iniciando o projeto 
+### Running the project
 
-Listando emulators
+List available emulators:
 
     flutter emulators
 
-Iniciando emulador
+Launch an emulator:
 
     flutter emulators --launch <emulator-name>
 
-Com um device conectado, execute o comando abaixo:
+With a device or emulator connected, run:
 
     flutter run
 
-### Sobrescrevendo configurações
+### Overriding configuration
 
-Você pode usar compile time variables para sobrescrever as configurações definidas no arquivo [env_config.dart](lib/configs/env_config.dart).
+You can use compile-time variables to override the settings defined in [env_config.dart](lib/configs/env_config.dart).
 
     flutter run --dart-define=API_URL=http://192.168.1.2:5000/api/v1
 
-### Build apk em modo debug
+Example with a local backend:
+
+    flutter run --dart-define=API_URL=http://localhost:8080/api/v1
+
+### Debug APK build
 
     flutter build apk --debug
 
-### Antes do push
+### Before pushing changes
 
 ```shell
-    dart format .
-    flutter analyze .
+dart format .
+flutter analyze .
 ```
-## Docs
 
-[Documentação](./docs/).
+## Documentation
 
-## Como contribuir
+[Documentation](./docs/).
 
-Para ajuda e informações de como contribuir com o projeto, acesse a [página oficial do e-codel](http://www.ecordel.com.br/como-contribuir).
+## How to contribute
 
-## Canais de Comunicação
+For help and information about contributing to the project, visit the official [E-cordel contribution page](http://www.ecordel.com.br/como-contribuir).
 
-Nos encontre nas seguintes plataformas abaixo:
+## Communication channels
 
-<a href="https://ecordel.com.br/"><img align="center" alt="Site E-cordel" height="27" width="90" src="https://img.shields.io/badge/website-000000?style=for-the-badge&logo=About.me&logoColor=white"></a>
+Find us on the following platforms:
 
-<a href="https://www.linkedin.com/company/e-cordel/"> <img align="center" alt="Linkedin" height="27" width="90" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"> </a>
+<a href="https://ecordel.com.br/"><img align="center" alt="E-cordel website" height="27" width="90" src="https://img.shields.io/badge/website-000000?style=for-the-badge&logo=About.me&logoColor=white"></a>
+
+<a href="https://www.linkedin.com/company/e-cordel/"> <img align="center" alt="LinkedIn" height="27" width="90" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"> </a>
 
 <a href="https://www.instagram.com/projetoecordel/"><img align="center" alt="Instagram" height="27" width="90" src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"></a>
