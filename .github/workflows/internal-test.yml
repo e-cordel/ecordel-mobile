@@ -43,6 +43,12 @@ jobs:
       - name: Build app blundle
         run: flutter build appbundle --dart-define=API_URL="$API_URL"
 
+      - name: Verify app bundle target SDK
+        run: |
+          AAPT=$(find "$ANDROID_HOME/build-tools" -name aapt -type f | sort -V | tail -n 1)
+          "$AAPT" dump xmltree build/app/outputs/bundle/release/app-release.aab base/manifest/AndroidManifest.xml | tee manifest.txt
+          grep -q 'targetSdkVersion.*35' manifest.txt
+
       - name: Setup Fastlane
         uses: ruby/setup-ruby@v1
         with:
