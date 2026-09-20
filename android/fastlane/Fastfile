@@ -13,13 +13,9 @@ platform :android do
 
   desc "Submit a new internal version"
   lane :internal do
-    aab_path = File.expand_path('../build/app/outputs/bundle/release/app-release.aab', __dir__)
-    UI.user_error!("Missing app bundle: #{aab_path}") unless File.exist?(aab_path)
-
-    sh("sha256sum #{aab_path}")
     upload_to_play_store(
       track: 'internal',
-      aab: aab_path,
+      aab: '../build/app/outputs/bundle/release/app-release.aab',
       json_key_data: ENV['PLAY_STORE_CONFIG_JSON'],
       )
   end
