@@ -17,7 +17,10 @@ platform :android do
       track: 'internal',
       aab: '../build/app/outputs/bundle/release/app-release.aab',
       json_key_data: ENV['PLAY_STORE_CONFIG_JSON'],
-      )
+      skip_upload_apk: true,
+      deactivate_on_promoted: false,
+      changes_not_sent_for_review: true
+    )
   end
 
 end
