@@ -45,9 +45,9 @@ jobs:
 
       - name: Verify app bundle target SDK
         run: |
-          AAPT=$(find "$ANDROID_HOME/build-tools" -name aapt -type f | sort -V | tail -n 1)
-          "$AAPT" dump xmltree build/app/outputs/bundle/release/app-release.aab base/manifest/AndroidManifest.xml | tee manifest.txt
-          grep -q 'targetSdkVersion.*35' manifest.txt
+          curl --fail --location --output bundletool.jar https://github.com/google/bundletool/releases/download/1.18.2/bundletool-all-1.18.2.jar
+          java -jar bundletool.jar dump manifest --bundle=build/app/outputs/bundle/release/app-release.aab | tee manifest.xml
+          grep -q 'android:targetSdkVersion="35"' manifest.xml
 
       - name: Setup Fastlane
         uses: ruby/setup-ruby@v1
