@@ -45,12 +45,18 @@ android {
 
     defaultConfig {
         applicationId "br.com.ecordel.app"
-        minSdkVersion 28
-        targetSdkVersion 35
+        
+        minSdk 28
+        targetSdk 35
+        
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [applicationName: "io.flutter.app.FlutterApplication"]
+        
+        manifestPlaceholders += [
+            applicationName: "android.app.Application"
+        ]
     }
 
     signingConfigs {
